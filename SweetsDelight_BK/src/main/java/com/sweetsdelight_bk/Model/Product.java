@@ -1,9 +1,12 @@
 package com.sweetsdelight_bk.Model;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,4 +31,11 @@ public class Product {
 
 	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
 	private Admin admin;
+
+	@OneToMany(mappedBy = "sweetItem_Id", cascade = CascadeType.ALL)
+	private List<SweetItem> sweetItems;
+	
+	@ManyToOne
+	@JoinColumn(name = "product")
+	private Cart cart;
 }
