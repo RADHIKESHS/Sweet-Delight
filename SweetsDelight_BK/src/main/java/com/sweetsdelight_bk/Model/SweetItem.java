@@ -19,6 +19,9 @@ public class SweetItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sweetItemId;
+	
+	@ManyToOne
+	@JoinColumn
 	private Product product;
 
 	@ManyToOne

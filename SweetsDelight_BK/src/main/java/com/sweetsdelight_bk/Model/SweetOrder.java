@@ -22,11 +22,11 @@ public class SweetOrder {
 	@ManyToOne
 	@JoinColumn(name = "customer_Id")
 	private Customer customer;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "sweetItem_Id")
 	private List<SweetItem> sweetItem;
-	
+
 	private Map<Product, Long> groupedProducts;
 	@ManyToOne
 	@JoinColumn(name = "orderBill_Id")
