@@ -2,10 +2,12 @@ package com.sweetsdelight_bk.Model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,4 +25,10 @@ public class Cart {
 	private double total;
 	private double grandTotal;
 	private List<Product> product;
+
+	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+	private Customer customer;
+
+	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+	private Admin admin;
 }

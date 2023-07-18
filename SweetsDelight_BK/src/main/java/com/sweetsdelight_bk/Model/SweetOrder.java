@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +18,17 @@ import lombok.NoArgsConstructor;
 public class SweetOrder {
 
 	private Integer sweetOrderId;
-	private Users users;
-	private List<SweetItem> sweetItem;
 	private LocalDateTime createdDate;
+	@ManyToOne
+	@JoinColumn(name = "customer_Id")
+	private Customer customer;
+	
+	@ManyToOne
+	@JoinColumn(name = "sweetItem_Id")
+	private List<SweetItem> sweetItem;
+	
 	private Map<Product, Long> groupedProducts;
-
+	@ManyToOne
+	@JoinColumn(name = "orderBill_Id")
+	private OrderBill orderBill;
 }
