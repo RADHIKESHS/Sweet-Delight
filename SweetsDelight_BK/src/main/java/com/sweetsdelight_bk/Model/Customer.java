@@ -8,7 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -26,16 +25,21 @@ public class Customer {
 	private Long customerId;
 	private String username;
 
-	@OneToMany(mappedBy = "sweetOrder_Id", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private Set<SweetOrder> sweetOrder;
 
-	@OneToMany(mappedBy = "sweetItem_Id", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	private List<SweetItem> sweetItems;
-	
-	@OneToOne
-	@JoinColumn(name = "cart_Id")
+
+	@OneToOne(mappedBy = "customer")
 	private Cart cart;
-	
-	@OneToOne(mappedBy = "customer",cascade = CascadeType.ALL)
+
+	@OneToOne(mappedBy = "customer")
 	private Admin admin;
+
+	public Customer(String username) {
+		super();
+		this.username = username;
+	}
+
 }

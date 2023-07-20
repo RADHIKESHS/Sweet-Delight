@@ -1,0 +1,255 @@
+2023-07-20T23:19:13.095+05:30  INFO 25920 --- [restartedMain] c.s.SweetsDelightBkApplication           : Starting SweetsDelightBkApplication using Java 17.0.5 with PID 25920 (C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK\target\classes started by RAHUL KUMAR THAKUR in C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK)
+2023-07-20T23:19:13.097+05:30  INFO 25920 --- [restartedMain] c.s.SweetsDelightBkApplication           : No active profile set, falling back to 1 default profile: "default"
+2023-07-20T23:19:13.157+05:30  INFO 25920 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-20T23:19:13.157+05:30  INFO 25920 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-20T23:19:14.096+05:30  INFO 25920 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-20T23:19:14.181+05:30  INFO 25920 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 9 JPA repository interfaces.
+2023-07-20T23:19:14.794+05:30  INFO 25920 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2023-07-20T23:19:14.805+05:30  INFO 25920 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-20T23:19:14.805+05:30  INFO 25920 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-20T23:19:14.884+05:30  INFO 25920 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-20T23:19:14.885+05:30  INFO 25920 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1728 ms
+2023-07-20T23:19:15.042+05:30  INFO 25920 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-20T23:19:15.133+05:30  INFO 25920 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-20T23:19:15.134+05:30  INFO 25920 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-07-20T23:19:15.317+05:30  INFO 25920 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:19:15.490+05:30  INFO 25920 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-20T23:19:15.510+05:30  INFO 25920 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-20T23:19:15.861+05:30  INFO 25920 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6cc12ddb
+2023-07-20T23:19:15.863+05:30  INFO 25920 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-20T23:19:16.241+05:30 ERROR 25920 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Association 'com.sweetsdelight_bk.Model.Admin.cart' is 'mappedBy' a property named 'admin' which does not exist in the target entity type 'com.sweetsdelight_bk.Model.Cart'
+2023-07-20T23:19:16.241+05:30  WARN 25920 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Association 'com.sweetsdelight_bk.Model.Admin.cart' is 'mappedBy' a property named 'admin' which does not exist in the target entity type 'com.sweetsdelight_bk.Model.Cart'
+2023-07-20T23:19:16.243+05:30  INFO 25920 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-20T23:19:16.253+05:30  INFO 25920 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-20T23:19:16.257+05:30  INFO 25920 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-20T23:19:16.270+05:30  INFO 25920 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-07-20T23:19:16.298+05:30 ERROR 25920 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Association 'com.sweetsdelight_bk.Model.Admin.cart' is 'mappedBy' a property named 'admin' which does not exist in the target entity type 'com.sweetsdelight_bk.Model.Cart'
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154) ~[spring-context-6.0.10.jar:6.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931) ~[spring-context-6.0.10.jar:6.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.10.jar:6.0.10]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.1.jar:3.1.1]
+	at com.sweetsdelight_bk.SweetsDelightBkApplication.main(SweetsDelightBkApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.1.jar:3.1.1]
+Caused by: org.hibernate.AnnotationException: Association 'com.sweetsdelight_bk.Model.Admin.cart' is 'mappedBy' a property named 'admin' which does not exist in the target entity type 'com.sweetsdelight_bk.Model.Cart'
+	at org.hibernate.boot.model.internal.OneToOneSecondPass.targetProperty(OneToOneSecondPass.java:233) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.model.internal.OneToOneSecondPass.bindUnowned(OneToOneSecondPass.java:143) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.model.internal.OneToOneSecondPass.doSecondPass(OneToOneSecondPass.java:127) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1857) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1814) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:328) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1380) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1451) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.10.jar:6.0.10]
+	... 21 common frames omitted
+
+2023-07-20T23:27:50.732+05:30  INFO 3912 --- [restartedMain] c.s.SweetsDelightBkApplication           : Starting SweetsDelightBkApplication using Java 17.0.5 with PID 3912 (C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK\target\classes started by RAHUL KUMAR THAKUR in C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK)
+2023-07-20T23:27:50.735+05:30  INFO 3912 --- [restartedMain] c.s.SweetsDelightBkApplication           : No active profile set, falling back to 1 default profile: "default"
+2023-07-20T23:27:50.785+05:30  INFO 3912 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-20T23:27:50.785+05:30  INFO 3912 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-20T23:27:51.488+05:30  INFO 3912 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-20T23:27:51.559+05:30  INFO 3912 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 9 JPA repository interfaces.
+2023-07-20T23:27:52.121+05:30  INFO 3912 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2023-07-20T23:27:52.135+05:30  INFO 3912 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-20T23:27:52.135+05:30  INFO 3912 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-20T23:27:52.216+05:30  INFO 3912 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-20T23:27:52.216+05:30  INFO 3912 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1430 ms
+2023-07-20T23:27:52.376+05:30  INFO 3912 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-20T23:27:52.447+05:30  INFO 3912 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-20T23:27:52.451+05:30  INFO 3912 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-07-20T23:27:52.610+05:30  INFO 3912 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:27:52.785+05:30  INFO 3912 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-20T23:27:52.805+05:30  INFO 3912 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-20T23:27:53.133+05:30  INFO 3912 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@245f1acb
+2023-07-20T23:27:53.135+05:30  INFO 3912 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-20T23:27:53.490+05:30 ERROR 3912 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Could not determine recommended JdbcType for `java.util.Map<com.sweetsdelight_bk.Model.Product, java.lang.Long>`
+2023-07-20T23:27:53.490+05:30  WARN 3912 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Could not determine recommended JdbcType for `java.util.Map<com.sweetsdelight_bk.Model.Product, java.lang.Long>`
+2023-07-20T23:27:53.492+05:30  INFO 3912 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-20T23:27:53.503+05:30  INFO 3912 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-20T23:27:53.505+05:30  INFO 3912 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-20T23:27:53.519+05:30  INFO 3912 --- [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2023-07-20T23:27:53.538+05:30 ERROR 3912 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/autoconfigure/orm/jpa/HibernateJpaConfiguration.class]: Could not determine recommended JdbcType for `java.util.Map<com.sweetsdelight_bk.Model.Product, java.lang.Long>`
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1770) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1154) ~[spring-context-6.0.10.jar:6.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:931) ~[spring-context-6.0.10.jar:6.0.10]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:608) ~[spring-context-6.0.10.jar:6.0.10]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:734) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:436) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1306) ~[spring-boot-3.1.1.jar:3.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1295) ~[spring-boot-3.1.1.jar:3.1.1]
+	at com.sweetsdelight_bk.SweetsDelightBkApplication.main(SweetsDelightBkApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.1.1.jar:3.1.1]
+Caused by: org.hibernate.type.descriptor.java.spi.JdbcTypeRecommendationException: Could not determine recommended JdbcType for `java.util.Map<com.sweetsdelight_bk.Model.Product, java.lang.Long>`
+	at org.hibernate.type.descriptor.java.spi.UnknownBasicJavaType.getRecommendedJdbcType(UnknownBasicJavaType.java:37) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.model.process.internal.InferredBasicValueResolver.from(InferredBasicValueResolver.java:222) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.mapping.BasicValue.buildResolution(BasicValue.java:480) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.mapping.BasicValue.resolve(BasicValue.java:310) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.mapping.BasicValue.resolve(BasicValue.java:300) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.lambda$processValueResolvers$4(InFlightMetadataCollectorImpl.java:1842) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1682) ~[na:na]
+	at java.base/java.util.ArrayList.removeIf(ArrayList.java:1660) ~[na:na]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processValueResolvers(InFlightMetadataCollectorImpl.java:1841) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.processSecondPasses(InFlightMetadataCollectorImpl.java:1827) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:328) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.metadata(EntityManagerFactoryBuilderImpl.java:1380) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1451) ~[hibernate-core-6.2.5.Final.jar:6.2.5.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:75) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352) ~[spring-orm-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816) ~[spring-beans-6.0.10.jar:6.0.10]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766) ~[spring-beans-6.0.10.jar:6.0.10]
+	... 21 common frames omitted
+
+2023-07-20T23:34:00.061+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Starting SweetsDelightBkApplication using Java 17.0.5 with PID 27720 (C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK\target\classes started by RAHUL KUMAR THAKUR in C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK)
+2023-07-20T23:34:00.065+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : No active profile set, falling back to 1 default profile: "default"
+2023-07-20T23:34:00.110+05:30  INFO 27720 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-07-20T23:34:00.110+05:30  INFO 27720 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-07-20T23:34:00.766+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-20T23:34:00.836+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 9 JPA repository interfaces.
+2023-07-20T23:34:01.370+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2023-07-20T23:34:01.381+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-20T23:34:01.381+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-20T23:34:01.454+05:30  INFO 27720 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-20T23:34:01.455+05:30  INFO 27720 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1344 ms
+2023-07-20T23:34:01.599+05:30  INFO 27720 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-20T23:34:01.677+05:30  INFO 27720 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.5.Final
+2023-07-20T23:34:01.680+05:30  INFO 27720 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-07-20T23:34:01.840+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:34:01.988+05:30  INFO 27720 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-20T23:34:02.008+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-07-20T23:34:02.303+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@53a8ba1f
+2023-07-20T23:34:02.305+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-07-20T23:34:02.662+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:34:03.516+05:30  INFO 27720 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-20T23:34:04.569+05:30  INFO 27720 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-20T23:34:04.720+05:30  WARN 27720 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-20T23:34:05.620+05:30  INFO 27720 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-20T23:34:05.666+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2023-07-20T23:34:05.675+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Started SweetsDelightBkApplication in 5.977 seconds (process running for 6.638)
+2023-07-20T23:34:46.078+05:30  INFO 27720 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-20T23:34:46.090+05:30  INFO 27720 --- [Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-20T23:34:46.098+05:30  INFO 27720 --- [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-20T23:34:46.102+05:30  INFO 27720 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-07-20T23:34:46.109+05:30  INFO 27720 --- [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-07-20T23:34:46.176+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Starting SweetsDelightBkApplication using Java 17.0.5 with PID 27720 (C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK\target\classes started by RAHUL KUMAR THAKUR in C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK)
+2023-07-20T23:34:46.176+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : No active profile set, falling back to 1 default profile: "default"
+2023-07-20T23:34:46.362+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-20T23:34:46.385+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 23 ms. Found 9 JPA repository interfaces.
+2023-07-20T23:34:46.458+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2023-07-20T23:34:46.459+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-20T23:34:46.459+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-20T23:34:46.475+05:30  INFO 27720 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-20T23:34:46.475+05:30  INFO 27720 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 297 ms
+2023-07-20T23:34:46.506+05:30  INFO 27720 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-20T23:34:46.513+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:34:46.514+05:30  INFO 27720 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-20T23:34:46.515+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2023-07-20T23:34:46.533+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@16e6d2e4
+2023-07-20T23:34:46.533+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2023-07-20T23:34:46.561+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:34:46.658+05:30  INFO 27720 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-20T23:34:46.843+05:30  INFO 27720 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-20T23:34:46.874+05:30  WARN 27720 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-20T23:34:47.199+05:30  INFO 27720 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-20T23:34:47.209+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2023-07-20T23:34:47.219+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Started SweetsDelightBkApplication in 1.065 seconds (process running for 48.181)
+2023-07-20T23:34:47.221+05:30  INFO 27720 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-20T23:35:48.133+05:30  INFO 27720 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-20T23:35:48.143+05:30  INFO 27720 --- [Thread-7] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-20T23:35:48.148+05:30  INFO 27720 --- [Thread-7] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-20T23:35:48.150+05:30  INFO 27720 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2023-07-20T23:35:48.154+05:30  INFO 27720 --- [Thread-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2023-07-20T23:35:48.228+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Starting SweetsDelightBkApplication using Java 17.0.5 with PID 27720 (C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK\target\classes started by RAHUL KUMAR THAKUR in C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK)
+2023-07-20T23:35:48.229+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : No active profile set, falling back to 1 default profile: "default"
+2023-07-20T23:35:48.452+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-20T23:35:48.485+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 31 ms. Found 9 JPA repository interfaces.
+2023-07-20T23:35:48.560+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2023-07-20T23:35:48.561+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-20T23:35:48.561+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-20T23:35:48.587+05:30  INFO 27720 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-20T23:35:48.587+05:30  INFO 27720 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 355 ms
+2023-07-20T23:35:48.626+05:30  INFO 27720 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-20T23:35:48.636+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:35:48.636+05:30  INFO 27720 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-20T23:35:48.638+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2023-07-20T23:35:48.649+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection com.mysql.cj.jdbc.ConnectionImpl@11c622e5
+2023-07-20T23:35:48.649+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2023-07-20T23:35:48.687+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:35:48.783+05:30  INFO 27720 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-20T23:35:48.944+05:30  INFO 27720 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-20T23:35:48.976+05:30  WARN 27720 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-20T23:35:49.299+05:30  INFO 27720 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-20T23:35:49.316+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2023-07-20T23:35:49.321+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Started SweetsDelightBkApplication in 1.121 seconds (process running for 110.284)
+2023-07-20T23:35:49.323+05:30  INFO 27720 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2023-07-20T23:37:38.643+05:30  INFO 27720 --- [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2023-07-20T23:37:38.652+05:30  INFO 27720 --- [Thread-11] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-07-20T23:37:38.656+05:30  INFO 27720 --- [Thread-11] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-07-20T23:37:38.657+05:30  INFO 27720 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2023-07-20T23:37:38.661+05:30  INFO 27720 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2023-07-20T23:37:38.731+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Starting SweetsDelightBkApplication using Java 17.0.5 with PID 27720 (C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK\target\classes started by RAHUL KUMAR THAKUR in C:\Users\RAHUL KUMAR THAKUR\OneDrive\Desktop\Construct week\Unit-6 Async\frail-power-8560\SweetsDelight_BK)
+2023-07-20T23:37:38.733+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : No active profile set, falling back to 1 default profile: "default"
+2023-07-20T23:37:39.034+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-07-20T23:37:39.059+05:30  INFO 27720 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 25 ms. Found 9 JPA repository interfaces.
+2023-07-20T23:37:39.148+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8088 (http)
+2023-07-20T23:37:39.148+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-07-20T23:37:39.148+05:30  INFO 27720 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.10]
+2023-07-20T23:37:39.168+05:30  INFO 27720 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-07-20T23:37:39.168+05:30  INFO 27720 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 433 ms
+2023-07-20T23:37:39.206+05:30  INFO 27720 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-07-20T23:37:39.220+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:37:39.220+05:30  INFO 27720 --- [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-07-20T23:37:39.221+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2023-07-20T23:37:39.235+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3801316e
+2023-07-20T23:37:39.235+05:30  INFO 27720 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2023-07-20T23:37:39.265+05:30  INFO 27720 --- [restartedMain] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-07-20T23:37:39.378+05:30  INFO 27720 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-07-20T23:37:39.558+05:30  INFO 27720 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-07-20T23:37:39.598+05:30  WARN 27720 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-07-20T23:37:40.053+05:30  INFO 27720 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-07-20T23:37:40.076+05:30  INFO 27720 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8088 (http) with context path ''
+2023-07-20T23:37:40.084+05:30  INFO 27720 --- [restartedMain] c.s.SweetsDelightBkApplication           : Started SweetsDelightBkApplication in 1.375 seconds (process running for 221.047)
+2023-07-20T23:37:40.086+05:30  INFO 27720 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged

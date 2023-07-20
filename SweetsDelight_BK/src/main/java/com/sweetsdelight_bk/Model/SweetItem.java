@@ -19,21 +19,26 @@ public class SweetItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sweetItemId;
-	
+
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(name = "product_Id")
 	private Product product;
 
 	@ManyToOne
-	@JoinColumn(name = "sweetItem")
+	@JoinColumn(name = "sweetOrder_Id")
 	private SweetOrder sweetOrder;
 
 	@ManyToOne
-	@JoinColumn(name = "sweetItem")
+	@JoinColumn(name = "customer_Id")
 	private Customer customer;
 
 	@ManyToOne
-	@JoinColumn(name = "sweetItem")
+	@JoinColumn(name = "admin_Id")
 	private Admin admin;
+
+	public SweetItem(Product product) {
+		super();
+		this.product = product;
+	}
 
 }

@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -26,12 +27,22 @@ public class Cart {
 	private double total;
 	private double grandTotal;
 
-	@OneToMany(mappedBy = "product_Id")
-	private List<Product> product;
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	private List<Product> products;
 
-	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "customer_Id")
 	private Customer customer;
 
-	@OneToOne(mappedBy = "cart", cascade = CascadeType.ALL)
-	private Admin admin;
+	@OneToOne
+    @JoinColumn(name = "admin_Id")
+    private Admin admin;
+
+	public Cart(Integer productCount, double total, double grandTotal) {
+		super();
+		this.productCount = productCount;
+		this.total = total;
+		this.grandTotal = grandTotal;
+	}
+
 }

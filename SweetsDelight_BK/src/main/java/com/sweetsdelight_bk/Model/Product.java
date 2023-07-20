@@ -4,10 +4,12 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +20,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Product {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productId;
 	private String name;
 	private String photoPath;
@@ -29,13 +33,24 @@ public class Product {
 	@JoinColumn(name = "category_Id")
 	private Category category;
 
-	@OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name = "admin_Id")
 	private Admin admin;
 
-	@OneToMany(mappedBy = "sweetItem_Id", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
 	private List<SweetItem> sweetItems;
-	
+
 	@ManyToOne
-	@JoinColumn(name = "product")
+	@JoinColumn(name = "cart_Id")
 	private Cart cart;
+
+	public Product(String name, String photoPath, Double price, String description, boolean available) {
+		super();
+		this.name = name;
+		this.photoPath = photoPath;
+		this.price = price;
+		this.description = description;
+		this.available = available;
+	}
+
 }

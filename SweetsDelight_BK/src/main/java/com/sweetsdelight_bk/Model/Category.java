@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -25,8 +26,15 @@ public class Category {
 	private String name;
 
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-	List<Product> products;
+	private List<Product> products;
 
-	@OneToOne(mappedBy = "category", cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "admin_Id")
 	private Admin admin;
+
+	public Category(String name) {
+		super();
+		this.name = name;
+	}
+
 }
