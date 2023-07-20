@@ -2,7 +2,6 @@ package com.sweetsdelight_bk.Model;
 
 import java.util.List;
 
-import jakarta.annotation.Generated;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +23,7 @@ public class Product {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	private Integer productId;
 	private String name;
 	private String photoPath;
