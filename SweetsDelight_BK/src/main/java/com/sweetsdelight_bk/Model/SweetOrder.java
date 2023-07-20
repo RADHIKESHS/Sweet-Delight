@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class SweetOrder {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer sweetOrderId;
@@ -43,7 +42,6 @@ public class SweetOrder {
 	@MapKeyJoinColumn(name = "product_id")
 	@Column(name = "quantity")
 	private Map<Product, Long> groupedProducts;
-
 	@ManyToOne
 	@JoinColumn(name = "orderBill_Id")
 	private OrderBill orderBill;
