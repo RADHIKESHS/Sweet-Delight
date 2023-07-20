@@ -13,9 +13,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 public class OrderBill {
 
@@ -24,8 +24,14 @@ public class OrderBill {
 	private Integer orderBillId;
 	private LocalDateTime localDate;
 	private float totalCost;
-	
+
 	@OneToMany(mappedBy = "orderBill", cascade = CascadeType.ALL)
 	private List<SweetOrder> sweetOrders;
+
+	public OrderBill(LocalDateTime localDate, float totalCost) {
+		super();
+		this.localDate = localDate;
+		this.totalCost = totalCost;
+	}
 
 }
