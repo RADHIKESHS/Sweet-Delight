@@ -5,7 +5,7 @@ import java.util.List;
 import com.sweetsdelight_bk.Model.OrderBill;
 
 public interface OrderBillService {
-	 OrderBill addOrderBill(OrderBill orderBill);
+	 OrderBill addOrderBill(OrderBill orderBill,int id);
 
 	    OrderBill updateOrderBill(int id,OrderBill orderBill);
 
@@ -13,5 +13,5 @@ public interface OrderBillService {
 
 	    List<OrderBill> showAllOrderBills();
 
-	    List<OrderBill> showAllOrderBills(int orderId);
+	    List<OrderBill> showAllOrderBillsofCustomerById(int customerId);
 }

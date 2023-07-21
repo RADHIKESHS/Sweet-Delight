@@ -37,7 +37,7 @@ public class OrderBill {
 
     public OrderBill(LocalDateTime localDate, float totalCost) {
         super();
-        this.localDate = localDate;
+        this.localDate = LocalDateTime.now();
         this.totalCost = totalCost;
     }
 }
