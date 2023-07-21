@@ -22,7 +22,6 @@ public class CartServiceImpl {
 
     public Cart addCart(Cart cart) {
     	if(cart==null) throw new  SweetDelightBkException("Cart is null");
-    	
         return cartRepository.save(cart);
     }
 

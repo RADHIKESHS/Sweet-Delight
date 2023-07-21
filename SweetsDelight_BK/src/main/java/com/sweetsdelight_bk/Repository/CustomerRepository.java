@@ -8,5 +8,5 @@ import com.sweetsdelight_bk.Model.Cart;
 import com.sweetsdelight_bk.Model.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
-//	public List<Customer> findAllbyCustomerid(int id);
+
 }

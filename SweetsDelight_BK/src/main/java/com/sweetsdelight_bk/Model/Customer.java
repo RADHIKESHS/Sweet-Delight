@@ -1,6 +1,7 @@
 package com.sweetsdelight_bk.Model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +27,7 @@ public class Customer extends Users {
     private String email;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private Set<SweetOrder> sweetOrder;
+    private Set<SweetOrder> sweetOrder = new HashSet();
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<OrderBill> orderBill = new ArrayList<>();

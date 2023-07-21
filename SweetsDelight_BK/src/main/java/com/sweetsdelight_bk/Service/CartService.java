@@ -9,9 +9,5 @@ public interface CartService {
 	 public Cart updateCart(Cart cart);
 	 public Cart cancelCart(int cartId);
 	 public List<Cart> showAllcarts();
-	 public List<Cart> showAllcarts(int cartid);
-	      
-	    
-	       
-	    
+	 public List<Cart> showAllcarts(int cartid);	      	    
 }
