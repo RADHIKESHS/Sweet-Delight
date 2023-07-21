@@ -1,5 +1,6 @@
 package com.sweetsdelight_bk.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -7,9 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,21 +20,13 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Category {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer categoryId;
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer categoryId;
 
-	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-	private List<Product> products;
+    @NotBlank(message = "category name should not be null")
+    private String name;
 
-	@OneToOne
-	@JoinColumn(name = "admin_Id")
-	private Admin admin;
-
-	public Category(String name) {
-		super();
-		this.name = name;
-	}
-
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 }

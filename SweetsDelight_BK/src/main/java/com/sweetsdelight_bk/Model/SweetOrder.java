@@ -1,21 +1,22 @@
 package com.sweetsdelight_bk.Model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.persistence.CascadeType;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapKeyJoinColumn;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,30 +26,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class SweetOrder {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer sweetOrderId;
-	private LocalDateTime createdDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer sweetOrderId;
 
-	@ManyToOne
-	@JoinColumn(name = "customer_Id")
-	private Customer customer;
+    private LocalDateTime createdDate;
+    
+    @Enumerated
+    private OrderStatus orderstatus;
 
-	@OneToMany(mappedBy = "sweetOrder", cascade = CascadeType.ALL)
-	private List<SweetItem> sweetItems;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-	@ElementCollection
-	@CollectionTable(name = "sweet_order_products", joinColumns = @JoinColumn(name = "sweet_order_id"))
-	@MapKeyJoinColumn(name = "product_id")
-	@Column(name = "quantity")
-	private Map<Product, Long> groupedProducts;
-	@ManyToOne
-	@JoinColumn(name = "orderBill_Id")
-	private OrderBill orderBill;
+//    private List<Product> products = new ArrayList<>();
+//    error get
 
-	public SweetOrder(LocalDateTime createdDate) {
-		super();
-		this.createdDate = createdDate;
-	}
-
+    @ManyToOne
+    @JoinColumn(name = "orderBill_id")
+    private OrderBill orderBill;
 }

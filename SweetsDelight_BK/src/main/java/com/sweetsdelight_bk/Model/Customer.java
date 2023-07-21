@@ -1,5 +1,6 @@
 package com.sweetsdelight_bk.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -7,7 +8,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -18,28 +18,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Customer {
+public class Customer extends Users {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long customerId;
-	private String username;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long customerId;
 
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private Set<SweetOrder> sweetOrder;
+    private String email;
 
-	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-	private List<SweetItem> sweetItems;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<SweetOrder> sweetOrder;
 
-	@OneToOne(mappedBy = "customer")
-	private Cart cart;
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private List<OrderBill> orderBill = new ArrayList<>();
 
-	@OneToOne(mappedBy = "customer")
-	private Admin admin;
-
-	public Customer(String username) {
-		super();
-		this.username = username;
-	}
-
+    @OneToOne(mappedBy = "customer")
+    private Cart cart;
 }

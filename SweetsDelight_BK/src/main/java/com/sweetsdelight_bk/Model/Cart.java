@@ -1,5 +1,6 @@
 package com.sweetsdelight_bk.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -20,32 +21,18 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Cart {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cartId;
-	
-	private Integer productCount;
-	
-	private double total;
-	
-	private double grandTotal;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer cartId;
 
-	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-	private List<Product> products;
+    private Integer productCount;
 
-	@OneToOne
-	@JoinColumn(name = "customer_Id")
-	private Customer customer;
+    private double grandTotal;
 
-	@OneToOne
-    @JoinColumn(name = "admin_Id")
-    private Admin admin;
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    private List<Product> products = new ArrayList<>();
 
-	public Cart(Integer productCount, double total, double grandTotal) {
-		super();
-		this.productCount = productCount;
-		this.total = total;
-		this.grandTotal = grandTotal;
-	}
-
+    @OneToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 }

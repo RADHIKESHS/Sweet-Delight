@@ -27,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer updateCustomer(int id,Customer customer) {
-    	Optional< Customer> customerr=customerRepository.findById((long) id);
+    	Optional< Customer> customerr=customerRepository.findById(id);
     	   if(customerr.isEmpty()) 
     		   throw new SweetDelightBkException("no Customer Availablable with this id");
     	       return customerRepository.save(customer);
@@ -35,7 +35,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Customer cancelCustomer(int customerId) {
-        Optional<Customer> optionalCustomer = customerRepository.findById((long) customerId);
+        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
            // customer.setActive(false); // Assuming isActive is a boolean attribute to indicate customer's active status
@@ -52,13 +52,13 @@ public class CustomerServiceImpl implements CustomerService {
 		return list;
 	}
 
-	@Override
-	public List<Customer> showAllCustomers(int customerId) {
-	    
-        List<Customer> list= customerRepository.findAllbyCustomerid( (long) customerId);
-        if(list.isEmpty())  throw new SweetDelightBkException("No item available with cartId "+customerId);
-        return list;
-	}
+//	@Override
+//	public List<Customer> showAllCustomers(int customerId) {
+//	    
+//        List<Customer> list= customerRepository.findAllbyCustomerid(customerId);
+//        if(list.isEmpty())  throw new SweetDelightBkException("No item available with cartId "+customerId);
+//        return list;
+//	}
 
  
 }

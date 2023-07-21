@@ -1,14 +1,15 @@
 package com.sweetsdelight_bk.Model;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,19 +20,24 @@ import lombok.NoArgsConstructor;
 @Entity
 public class OrderBill {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer orderBillId;
-	private LocalDateTime localDate;
-	private float totalCost;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer orderBillId;
 
-	@OneToMany(mappedBy = "orderBill", cascade = CascadeType.ALL)
-	private List<SweetOrder> sweetOrders;
+    private LocalDateTime localDate;
 
-	public OrderBill(LocalDateTime localDate, float totalCost) {
-		super();
-		this.localDate = localDate;
-		this.totalCost = totalCost;
-	}
+    private float totalCost;
 
+    @OneToOne(mappedBy = "orderBill", cascade = CascadeType.ALL)
+    private SweetOrder sweetOrders;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    public OrderBill(LocalDateTime localDate, float totalCost) {
+        super();
+        this.localDate = localDate;
+        this.totalCost = totalCost;
+    }
 }

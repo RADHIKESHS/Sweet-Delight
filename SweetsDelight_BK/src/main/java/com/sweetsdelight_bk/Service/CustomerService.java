@@ -15,5 +15,5 @@ public interface CustomerService {
 
     List<Customer> showAllCustomers();
 
-    List<Customer> showAllCustomers(int customerId);
+//    List<Customer> showAllCustomers(int customerId);
 }

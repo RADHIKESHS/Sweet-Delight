@@ -9,5 +9,5 @@ public interface ProductService {
 	public Product updateProduct(Product product);
 	public Product cancelProduct(Integer productId);
 	public List<Product> showAllProducts();
-	public List<Product> showAllProductsById(Integer productId);
+//	public List<Product> showAllProductsById(Integer productId);
 }

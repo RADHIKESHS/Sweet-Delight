@@ -53,11 +53,11 @@ public class ProductServiceImpl implements ProductService {
 		return list;
 	}
 
-	@Override
-	public List<Product> showAllProductsById(Integer productId) {
-		productRepo.findById(productId).orElseThrow(()->new SweetDelightBkException("No product found"));
-		
-		return productRepo.findByProductProductId(productId);
-	}
+//	@Override
+//	public List<Product> showAllProductsById(Integer productId) {
+//		productRepo.findById(productId).orElseThrow(()->new SweetDelightBkException("No product found"));
+//		
+//		return productRepo.findByProductProductId(productId);
+//	}
 
 }
