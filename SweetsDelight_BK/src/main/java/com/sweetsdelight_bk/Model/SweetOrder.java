@@ -8,7 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,10 +29,13 @@ public class SweetOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sweetOrderId;
 
+
+
     @ManyToOne
     @NotNull
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "sweetOrder")
@@ -40,6 +43,7 @@ public class SweetOrder {
     
     
     @JsonIgnore
+
     @ManyToOne
     private OrderBill orderBill;
     
