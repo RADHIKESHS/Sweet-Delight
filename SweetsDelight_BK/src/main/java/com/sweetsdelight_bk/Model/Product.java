@@ -52,7 +52,7 @@ public class Product {
     @ManyToOne(cascade = CascadeType.ALL)
     private Cart cart;
 	
-	@NotNull
+    @JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Category category;
 

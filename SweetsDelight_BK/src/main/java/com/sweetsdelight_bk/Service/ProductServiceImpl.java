@@ -10,8 +10,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.sweetsdelight_bk.Exceptions.CategoryException;
 import com.sweetsdelight_bk.Exceptions.ProductException;
+import com.sweetsdelight_bk.Model.Category;
 import com.sweetsdelight_bk.Model.Product;
+import com.sweetsdelight_bk.Repository.CategoryRepo;
 import com.sweetsdelight_bk.Repository.ProductRepo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +27,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductRepo productRepo;
+	
+	@Autowired
+	private CategoryRepo categoryRepo;
 	
 	@Override
 	public Product addProduct(Product product) throws ProductException {
@@ -126,6 +132,21 @@ public class ProductServiceImpl implements ProductService {
 		log.info("Allproduct got which is available");
 		
 		return page;
+	}
+
+	@Override
+	public Product addProductToCategory(Integer productId, Integer categoryId)throws ProductException,CategoryException {
+		log.debug("Calling findbyId method from ProductJpa Repository");
+		Optional<Product> opt= productRepo.findById(productId);
+		if(opt.isEmpty()) {
+			throw new ProductException("No product found");
+		}
+		Product product=opt.get();
+		Optional<Category> cat= categoryRepo.findById(categoryId);
+		if(cat.isEmpty())throw new CategoryException("No category found");
+		Category category=cat.get();
+		product.setCategory(category);
+		return productRepo.save(product);
 	}
 	
 }

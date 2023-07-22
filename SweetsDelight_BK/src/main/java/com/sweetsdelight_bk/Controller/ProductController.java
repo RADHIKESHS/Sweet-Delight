@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sweetsdelight_bk.Exceptions.CategoryException;
 import com.sweetsdelight_bk.Exceptions.ProductException;
 import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Service.ProductService;
@@ -70,5 +71,10 @@ public class ProductController {
 		List<Product> products = productService.showAllProduct();
 		
 		return new ResponseEntity<>(products, HttpStatus.OK);
+	}
+	
+	@PutMapping("/{prodId}/{catId}")
+	public ResponseEntity<Product> addProductToCategory(@PathVariable Integer prodId,@PathVariable Integer catId)throws ProductException,CategoryException{
+		return new ResponseEntity<Product>(productService.addProductToCategory(prodId, catId), HttpStatus.CREATED);
 	}
 }

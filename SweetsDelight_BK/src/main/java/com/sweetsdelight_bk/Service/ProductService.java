@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.sweetsdelight_bk.Exceptions.CategoryException;
 import com.sweetsdelight_bk.Exceptions.ProductException;
 import com.sweetsdelight_bk.Model.Product;
 
@@ -26,5 +27,7 @@ public interface ProductService {
 	public List<Product> showAllProducts(int pageNumber,int pageSize) throws ProductException;  // admin & user
 	
 	public Page<Product> showAllProductsByAvailable(int pageNumber,int pageSize) throws ProductException; // admin // user
+	
+	public Product addProductToCategory(Integer productId,Integer categoryId)throws ProductException,CategoryException;
 	
 }

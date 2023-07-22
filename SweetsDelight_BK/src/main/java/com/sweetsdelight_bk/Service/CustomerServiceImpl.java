@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sweetsdelight_bk.Exceptions.CustomerException;
+import com.sweetsdelight_bk.Model.Cart;
 import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Repository.CustomerRepo;
 
@@ -21,6 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepo customerRepo;
 	
 	
+	
 
 	@Override
 	public Customer addCustomer(Customer customer) throws CustomerException {
@@ -29,9 +31,12 @@ public class CustomerServiceImpl implements CustomerService {
 			throw new CustomerException("Username already used");
 		}
 		log.debug("Calling save method from CustomerJpa Repository");
-		Customer cust=customerRepo.save(customer);
+		Cart cart= new Cart();
 		
+		Customer cust=customerRepo.save(customer);
+		cust.setCart(cart);
 		Optional<Customer> cs= customerRepo.findByCustomerEmail(customer.getCustomerEmail());
+		
 		
 		cs.get().setCustomerId(cs.get().getUserId());
 		
