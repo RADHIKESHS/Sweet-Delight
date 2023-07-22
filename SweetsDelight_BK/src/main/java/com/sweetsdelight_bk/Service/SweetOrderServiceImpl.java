@@ -1,16 +1,21 @@
 package com.sweetsdelight_bk.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Exceptions.OrderException;
 import com.sweetsdelight_bk.Model.Cart;
+import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Model.SweetOrder;
 import com.sweetsdelight_bk.Repository.CartRepo;
+import com.sweetsdelight_bk.Repository.CustomerRepo;
 import com.sweetsdelight_bk.Repository.SweetOrderRepo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,12 +32,20 @@ public class SweetOrderServiceImpl  implements SweetOrderService {
 	@Autowired
 	private CartRepo cartRepo;
 	
+	@Autowired
+	private CustomerRepo customerrepo;
+	
 	@Override
-	public String addSweetOrder(SweetOrder order) {
-
-		if(order==null)throw new OrderException("sweetOrder should not be null");
+	public String placeOrder(int customerid) throws CustomerException {
+        Customer cus=customerrepo.findById(customerid).orElseThrow(()->new CustomerException("No customer available"));
 		log.debug("Calling save method from SweetJpa Repository");
-			orderRepo.save(order);
+		Cart cart=cus.getCart();
+		List<Product> list=cart.getListProduct();
+		SweetOrder order=new SweetOrder();
+		order.setCustomer(cus);
+		order.setDate(LocalDateTime.now());
+		order.setProducts(list);
+		orderRepo.save(order);
 		log.info("Order saved sucessfully");
 		return "order saved successfull";
 	}

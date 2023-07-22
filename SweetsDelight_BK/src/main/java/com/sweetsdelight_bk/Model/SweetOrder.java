@@ -1,6 +1,7 @@
 package com.sweetsdelight_bk.Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class SweetOrder {
     private OrderBill orderBill;
     
     @NotNull
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Override
     public String toString() {

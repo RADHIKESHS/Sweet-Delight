@@ -2,12 +2,13 @@ package com.sweetsdelight_bk.Service;
 
 import java.util.List;
 
+import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Exceptions.OrderException;
 import com.sweetsdelight_bk.Model.SweetOrder;
 
 public interface SweetOrderService {
 
-	public String addSweetOrder(SweetOrder order);
+	public String placeOrder(int customer) throws CustomerException;
 	
 	public SweetOrder updateSweetOrder(SweetOrder order);
 	
