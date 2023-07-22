@@ -10,6 +10,7 @@ import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,14 +33,14 @@ public class SweetOrder {
 
     private LocalDateTime createdDate;
     
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderstatus;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-//    private List<Product> products = new ArrayList<>();
+//   private List<Product> products = new ArrayList<>();
 //    error get
 
     @ManyToOne
