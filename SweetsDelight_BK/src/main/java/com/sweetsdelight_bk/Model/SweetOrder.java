@@ -39,7 +39,7 @@ public class SweetOrder {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-//    private List<Product> products = new ArrayList<>();
+    private List<Product> sweetproduct = new ArrayList<>();
 //    error get
 
     @ManyToOne

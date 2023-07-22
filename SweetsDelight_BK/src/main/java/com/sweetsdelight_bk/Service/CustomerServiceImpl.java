@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sweetsdelight_bk.Exceptions.SweetDelightBkException;
-
+import com.sweetsdelight_bk.Model.Cart;
 import com.sweetsdelight_bk.Model.Customer;
+import com.sweetsdelight_bk.Model.Product;
+import com.sweetsdelight_bk.Model.SweetOrder;
 import com.sweetsdelight_bk.Repository.CustomerRepository;
 
 @Service
@@ -34,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
     	    }
 
     @Override
-    public Customer cancelCustomer(int customerId) {
+    public Customer deleteCustomer(int customerId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
@@ -50,6 +52,60 @@ public class CustomerServiceImpl implements CustomerService {
 	List<Customer> list=	customerRepository.findAll();
 	if(list.isEmpty())throw new SweetDelightBkException("Now Customer available");
 		return list;
+	}
+
+	@Override
+	public Customer updateAccountInfo(int customerId, String newName, String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Customer loginCustomer(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> displayAllSweets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Product> searchSweet(String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addToCart(int customerId, Product product) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public SweetOrder placeOrder(int customerId, Cart cart) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SweetOrder getOrderDetails(int orderId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<SweetOrder> getAllOrders(int customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double generateOrderBill(int orderId) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 //	@Override
