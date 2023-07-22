@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Model.SweetOrder;
 import com.sweetsdelight_bk.Service.SweetOrderService;
 
@@ -26,10 +27,10 @@ public class SweetOrderController {
 	@Autowired
 	private SweetOrderService service;
 	
-	@PostMapping("/add")
-	public ResponseEntity<String>  saveSweetOrder(@RequestBody SweetOrder order){
+	@PostMapping("/add/{id}")
+	public ResponseEntity<String>  saveSweetOrder(@PathVariable Integer id) throws CustomerException{
 		  
-		return new ResponseEntity<>(service.addSweetOrder(order),HttpStatus.CREATED);
+		return new ResponseEntity<>(service.placeOrder(id),HttpStatus.CREATED);
 	}
 	
 

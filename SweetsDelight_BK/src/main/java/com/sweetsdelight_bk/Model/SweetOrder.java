@@ -1,6 +1,7 @@
 package com.sweetsdelight_bk.Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,10 +30,13 @@ public class SweetOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sweetOrderId;
 
+
+
     @ManyToOne
     @NotNull
     @JoinColumn(name = "customer_id")
     private Customer customer;
+
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "sweetOrder")
@@ -40,11 +44,12 @@ public class SweetOrder {
     
     
     @JsonIgnore
+
     @ManyToOne
     private OrderBill orderBill;
     
     @NotNull
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Override
     public String toString() {
