@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sweetsdelight_bk.Exceptions.CartsException;
 import com.sweetsdelight_bk.Model.Cart;
+import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Service.CartService;
 
 
@@ -70,5 +71,10 @@ public class CartController {
 	@PutMapping("/{catId}/{prodId}")
 	public ResponseEntity<Cart> addProductToCart(@PathVariable Integer catId,@PathVariable Integer prodId)throws CartsException{
 		return new ResponseEntity<Cart>(cartService.addProductToCart(catId, prodId), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/cart/{id}/product")
+	public ResponseEntity<List<Product>> getProductByCustomerId(@PathVariable Integer id){
+		return new ResponseEntity<List<Product>>(cartService.getProductByCartId(id),HttpStatus.OK);
 	}
 }

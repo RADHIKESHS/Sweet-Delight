@@ -90,20 +90,41 @@ public class CartServiceImpl implements CartService {
 		
 		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
 		list= cart.getListProduct();
-		list.add(temp);
-		cart.setProductCount(list.size());
-		List<Double> price=list.stream().map(Product :: getPrice).toList();
-		Double total=cart.getTotal();
-		for(Double i: price) {
-			total+=i;
+		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
+		if(quan.size()>0) {
+			int t=quan.get(0).getQuantity();
+			t++;
+			quan.get(0).setQuantity(t);
+		}else {
+			temp.setQuantity(1);
+			list.add(temp);
 		}
+		
+		int count=cart.getProductCount();
+		count++;
+		cart.setProductCount(count);
+		
+		Double total=cart.getTotal();
+		total+=temp.getPrice();
 		cart.setTotal(total);
 		cart.setListProduct(list);
 		cust.setCart(cart);
+		temp.setCart(cart);
 		customerRepository.save(cust);
 		return cartRepositoty.save(cart);
 	}
-
+	
+	@Override
+	public List<Product> getProductByCartId(Integer customerId){
+		Optional<Customer> opt=customerRepository.findById(customerId);
+		if(opt.isEmpty())throw new CartsException("No customer found");
+		Customer cust= opt.get();
+		Cart cart=cust.getCart();
+		
+		
+		list= cart.getListProduct();
+		return list;
+	}
 	
 	
 	

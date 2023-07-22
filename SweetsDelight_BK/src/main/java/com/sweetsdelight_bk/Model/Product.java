@@ -1,6 +1,8 @@
 package com.sweetsdelight_bk.Model;
 
  
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -44,6 +46,8 @@ public class Product {
 	@NotNull(message = "Confirm availability")
 	private Boolean available;
 	
+	private int quantity;
+
 	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private SweetOrder sweetOrder;
@@ -56,6 +60,11 @@ public class Product {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Category category;
 
+
+	
+
+	
+	
 	
 	
 }

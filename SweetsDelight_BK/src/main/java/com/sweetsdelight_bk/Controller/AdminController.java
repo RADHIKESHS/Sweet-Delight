@@ -3,6 +3,7 @@ package com.sweetsdelight_bk.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sweetsdelight_bk.Exceptions.CategoryException;
@@ -75,7 +77,7 @@ public class AdminController {
 
     }
     
-    @PostMapping("/add_product/{id}")
+    @PostMapping("/product/add/{id}")
 	public ResponseEntity<Product> addProductHandler(@Valid @RequestBody Product product,@PathVariable Integer id) throws ProductException {
 		
 		Product savedProduct = productService.addProduct(product,id);
@@ -83,7 +85,7 @@ public class AdminController {
 		return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
 	}
 
-    @PutMapping("/update_product")
+    @PutMapping("/product/update")
 	public ResponseEntity<Product> updateProductHandler(@RequestBody Product product) throws ProductException {
 		
 		Product updatedProduct = productService.updateProduct(product);
@@ -91,7 +93,7 @@ public class AdminController {
 		return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
 	}
     
-    @DeleteMapping("/delete_product/{productId}")
+    @DeleteMapping("/product/delete/{productId}")
 	public ResponseEntity<String> deleteProductHandler(@PathVariable("productId") Integer productId) throws ProductException {
 		
 		String result = productService.deleteProduct(productId);
@@ -100,7 +102,7 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/getProduct/{productId}")
+	@GetMapping("/product/{productId}")
 	public ResponseEntity<Product> showProductById(@PathVariable("productId") Integer productId) throws ProductException {
 		
 		Product product = productService.showProductById(productId);
@@ -114,9 +116,23 @@ public class AdminController {
 		return new ResponseEntity<Product>(productService.addProductToCategory(prodId, catId), HttpStatus.CREATED);
 	}
 	
+	@GetMapping("/search")
+	public ResponseEntity<List<Product>> searchProductByName(@RequestParam("productName") String productName)throws ProductException{
+		return new ResponseEntity<List<Product>>(productService.searchByName(productName),HttpStatus.OK);
+	}
+	
+	@GetMapping("/product/all")
+	public ResponseEntity<List<Product>> allProduct(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize)throws ProductException{
+		return new ResponseEntity<List<Product>>(productService.showAllProducts(pageNumber, pageSize),HttpStatus.OK);
+	}
+	
+	@GetMapping("/product/available")
+	public ResponseEntity<Page<Product>> allavailableProduct(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize)throws ProductException{
+		return new ResponseEntity<Page<Product>>(productService.showAllProductsByAvailable(pageNumber, pageSize),HttpStatus.OK);
+	}
 	///Category
 	
-	@PostMapping("/add_category")
+	@PostMapping("/category/add")
 	public ResponseEntity<Category> addCategoryHandler(@RequestBody Category category){
 		
 		Category savedCategory = categoryService.addCategory(category);
@@ -125,7 +141,7 @@ public class AdminController {
 	}
 	
 	
-	@PutMapping("/update_category")
+	@PutMapping("/category/update")
 	public ResponseEntity<Category> updateCategoryHandler(@RequestBody Category category) {
 		
 		Category updatedCategory = categoryService.updateCategory(category);
@@ -134,7 +150,7 @@ public class AdminController {
 	}
 	
 	
-	@DeleteMapping("/delete_category/{id}")
+	@DeleteMapping("/category/delete/{id}")
 	public ResponseEntity<String> deleteCategoryHandler(@PathVariable("id") Integer id) {
 		
 		String result = categoryService.deleteCategory(id);
@@ -142,7 +158,7 @@ public class AdminController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
-	@GetMapping("/getCategory/{id}")
+	@GetMapping("/category/{id}")
 	public ResponseEntity<Category> showCategoryByIdHandler(@PathVariable("id") Integer id) {
 		
 		Category category = categoryService.showCategoryById(id);
