@@ -12,7 +12,7 @@ import com.sweetsdelight_bk.Model.Product;
 
 public interface ProductService {
 	
-	public Product addProduct(Product product) throws ProductException;//admin
+	public Product addProduct(Product product,Integer categoryId) throws ProductException;//admin
 	
 	public Product updateProduct(Product product) throws ProductException;//admin
 	

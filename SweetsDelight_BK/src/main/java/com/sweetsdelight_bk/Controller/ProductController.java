@@ -30,10 +30,10 @@ public class ProductController {
 	private ProductService productService;
 	
 	
-	@PostMapping("/add")
-	public ResponseEntity<Product> addProductHandler(@Valid @RequestBody Product product) throws ProductException {
+	@PostMapping("/add/{id}")
+	public ResponseEntity<Product> addProductHandler(@Valid @RequestBody Product product,@PathVariable Integer id) throws ProductException {
 		
-		Product savedProduct = productService.addProduct(product);
+		Product savedProduct = productService.addProduct(product,id);
 		
 		return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
 	}

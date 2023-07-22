@@ -36,17 +36,18 @@ public class CustomerServiceImpl implements CustomerService {
 		log.debug("Calling save method from CustomerJpa Repository");
 
 		
-
+		customer.setCustomerId(customer.getUserId());
 		Cart cart=new Cart();
 		cart.setGrandTotal(0.0);
 		cart.setProductCount(0);
+		cart.setTotal(0.0);
 		cartrepo.save(cart);
 		customer.setCart(cart);
 		
 
 		
 		Customer cust=customerRepo.save(customer);
-		cust.setCart(cart);
+		
 		Optional<Customer> cs= customerRepo.findByCustomerEmail(customer.getCustomerEmail());
 		
 		

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.sweetsdelight_bk.Exceptions.CartsException;
 import com.sweetsdelight_bk.Model.Cart;
+import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Repository.CartRepo;
+import com.sweetsdelight_bk.Repository.CustomerRepo;
 import com.sweetsdelight_bk.Repository.ProductRepo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +20,17 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class CartServiceImpl implements CartService {
-
+	
+	
+	List<Product> list;
 	@Autowired
 	private CartRepo cartRepositoty;
 	
 	@Autowired
 	private ProductRepo productRepository;
+	
+	@Autowired
+	private CustomerRepo customerRepository;
 	@Override
 	public Cart addCard(Cart cart) {
 		if(cart==null)throw new CartsException("Cart shuld not be null");
@@ -74,22 +81,26 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public Cart addProductToCart(Integer cartId, Integer productId)throws CartsException {
+	public Cart addProductToCart(Integer customerId, Integer productId)throws CartsException {
 		log.debug("Calling findById method from CartJpa Repository"); 
-		Optional<Cart> opt=cartRepositoty.findById(cartId);
+		Optional<Customer> opt=customerRepository.findById(customerId);
 		if(opt.isEmpty())throw new CartsException("No cart found");
-		Cart cart= opt.get();
+		Customer cust= opt.get();
+		Cart cart=cust.getCart();
+		
 		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
-		List<Product> list= cart.getListProduct();
+		list= cart.getListProduct();
 		list.add(temp);
 		cart.setProductCount(list.size());
 		List<Double> price=list.stream().map(Product :: getPrice).toList();
-		Double total=0.0;
+		Double total=cart.getTotal();
 		for(Double i: price) {
 			total+=i;
 		}
 		cart.setTotal(total);
 		cart.setListProduct(list);
+		cust.setCart(cart);
+		customerRepository.save(cust);
 		return cartRepositoty.save(cart);
 	}
 

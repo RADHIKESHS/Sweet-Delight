@@ -21,10 +21,10 @@ public class Cart {
 	private Double grandTotal;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "cart")
+	@OneToMany(mappedBy = "cart",cascade = CascadeType.PERSIST)
 	private List<Product> listProduct=new ArrayList<>();
 	
-	private Integer productCount;
+	private Integer productCount=this.listProduct.size();
 	private Double total;
 
 }

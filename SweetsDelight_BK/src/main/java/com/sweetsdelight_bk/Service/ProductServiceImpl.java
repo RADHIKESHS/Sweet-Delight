@@ -32,9 +32,11 @@ public class ProductServiceImpl implements ProductService {
 	private CategoryRepo categoryRepo;
 	
 	@Override
-	public Product addProduct(Product product) throws ProductException {
+	public Product addProduct(Product product,Integer categoryId) throws ProductException {
 		if(product==null)throw new ProductException("product should not be null");
 		log.debug("Calling save method from ProductJpa Repository");
+		Category category= categoryRepo.findById(categoryId).orElseThrow(()->new ProductException("No category found"));
+		product.setCategory(category);
 		Product savedProduct = productRepo.save(product);
 		log.info("product saved successfully");		
 		return savedProduct;

@@ -48,7 +48,7 @@ public class Customer extends User{
     private Set<SweetOrder> sweetOrders = new HashSet<>();
 
     @JsonIgnore
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
 
     @Override
