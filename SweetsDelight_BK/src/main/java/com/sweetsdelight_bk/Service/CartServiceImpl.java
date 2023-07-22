@@ -1,57 +1,76 @@
 package com.sweetsdelight_bk.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sweetsdelight_bk.Exceptions.SweetDelightBkException;
+import com.sweetsdelight_bk.Exceptions.CartsException;
 import com.sweetsdelight_bk.Model.Cart;
-import com.sweetsdelight_bk.Repository.CartRepository;
+import com.sweetsdelight_bk.Repository.CartRepo;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class CartServiceImpl {
+public class CartServiceImpl implements CartService {
 
-    @Autowired
-    private CartRepository cartRepository;
+	@Autowired
+	private CartRepo cartRepositoty;
 
-    public Cart addCart(Cart cart) {
-    	if(cart==null) throw new  SweetDelightBkException("Cart is null");
-        return cartRepository.save(cart);
-    }
+	@Override
+	public Cart addCard(Cart cart) {
+		if(cart==null)throw new CartsException("Cart shuld not be null");
+		log.debug("Calling Save method from CartJpa Repository");
+		Cart SavedCart=cartRepositoty.save(cart);
+		log.info("Cart saved successfully");
+		return SavedCart;
+	}
 
-   public Cart updateCart(int id,Cart cart) {
-  Optional< Cart> cartt=cartRepository.findById(id);
-   if(cartt.isEmpty()) 
-	   throw new SweetDelightBkException("no cart Availablable with this id");
-       return cartRepository.save(cart);
-    }
+	@Override
+	public Cart updateCard(Cart cart) {
+		Optional<Cart> opt=cartRepositoty.findById(cart.getCartId());
+		
+		if(opt.isPresent()){
+			log.debug("Calling Save method from CartJpa Repository"); 		
+			Cart upCart=cartRepositoty.save(cart);
+			log.info("Cart updated successfully");
+			return upCart;
+		}
+		else{
+			 throw new CartsException("Cart Doen't Exist");
+		}
+	}
 
-    public Cart cancelCart(int cartId) {
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
-        if(optionalCart.isEmpty()) throw new SweetDelightBkException("no cart availablable with this id");
-        	Cart cart = optionalCart.get();
-            cartRepository.deleteById(cartId);
-            return cart;
-    }
+	@Override
+	public String DeleteCart(Integer userId) {
+		Optional<Cart> opt=cartRepositoty.findById(userId);
+		if(opt.isPresent()){
+			log.debug("Calling Save method from CartJpa Repository"); 	
+			cartRepositoty.deleteById(userId);
+			log.info("Cart deleted successfully");
+			return "User Deleted";
+		}
+		else
+		{
+			throw new CartsException("user not Exist");
+		}
+	}
 
-    public List<Cart> showAllCarts() {
-    	
-        List<Cart> list= cartRepository.findAll();
-        if(list.isEmpty())  throw new SweetDelightBkException("No item available ");
-        return list;
-    }
+	@Override
+	public List<Cart> showAllCarts() {
+		log.debug("Calling findAll method from CartJpa Repository"); 
+		List<Cart> allList=cartRepositoty.findAll();
+		if(allList.isEmpty())throw new CartsException("No carts available");
+		
+		log.info("Getting all cart");
+		return allList;
+	}
 
-//    public List<Cart> showAllCarts(Long cartId) {
-//      
-//        List<Cart> list= cartRepository.findAllByCartId(cartId);
-//        if(list.isEmpty())  throw new SweetDelightBkException("No item available with cartId "+cartId);
-//        return list;
-//    }
+	
+	
+	
+	
+	
 }
-

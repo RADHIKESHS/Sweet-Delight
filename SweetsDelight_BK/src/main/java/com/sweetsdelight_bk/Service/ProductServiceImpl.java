@@ -1,6 +1,5 @@
 package com.sweetsdelight_bk.Service;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -11,78 +10,122 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.sweetsdelight_bk.Exceptions.SweetDelightBkException;
-import com.sweetsdelight_bk.Model.Category;
+import com.sweetsdelight_bk.Exceptions.ProductException;
 import com.sweetsdelight_bk.Model.Product;
-import com.sweetsdelight_bk.Repository.CategoryRepository;
-import com.sweetsdelight_bk.Repository.ProductRepository;
+import com.sweetsdelight_bk.Repository.ProductRepo;
+
+import lombok.extern.slf4j.Slf4j;
+
+
 
 @Service
+@Slf4j
 public class ProductServiceImpl implements ProductService {
-	
+
 	@Autowired
-	private ProductRepository productRepo;
-	
-	@Autowired
-	private CategoryRepository categoryRepo;
+	private ProductRepo productRepo;
 	
 	@Override
-	public Product addProduct(Product product,Integer categoryId) {
-		if(product==null)throw new SweetDelightBkException("Product is null");
-		Optional<Category> category= categoryRepo.findById(categoryId);
-		if(category.isEmpty())throw new SweetDelightBkException("Given category id is not present");
-		Category cate= category.get();
-		List<Product> list= cate.getProducts();
-		list.add(product);
-		cate.setProducts(list);
-		product.setCategory(cate);
-		return productRepo.save(product);
+	public Product addProduct(Product product) throws ProductException {
+		if(product==null)throw new ProductException("product should not be null");
+		log.debug("Calling save method from ProductJpa Repository");
+		Product savedProduct = productRepo.save(product);
+		log.info("product saved successfully");		
+		return savedProduct;
 	}
 
 	@Override
-	public Product updateProduct(Product product) {
-		Optional<Product> prod= productRepo.findById(product.getProductId());
-		if(prod.isEmpty())throw new SweetDelightBkException("No product found of product id "+product.getProductId());
+	public Product updateProduct(Product product) throws ProductException {
 		
-		return productRepo.save(product);
+		Optional<Product> opt = productRepo.findById(product.getProductid());
+		
+		if(opt.isPresent()) {
+			log.debug("Calling save method from ProductJpa Repository");
+			Product updatedProduct = productRepo.save(product);
+			log.info("product updated successfully");	
+			return updatedProduct;
+		} else {
+			throw new ProductException("Product not found!");
+		}
 	}
 
 	@Override
-	public Product cancelProduct(Integer productId) {
-		Optional<Product> prod= productRepo.findById(productId);
-		if(prod.isEmpty())throw new SweetDelightBkException("No product found of product id "+productId);
-		Product temp= prod.get();
-		productRepo.deleteById(productId);
-		return temp;
+	public String deleteProduct(Integer productId) throws ProductException {
+
+		Optional<Product> opt = productRepo.findById(productId);
+		
+		if(opt.isPresent()) {
+			log.debug("Calling delete method from ProductJpa Repository");
+			productRepo.delete(opt.get());
+			log.info("product deleted successfully");
+			return "Product deleted successfully.";
+		} else {
+			throw new ProductException("Product not found!");
+		}
 	}
 
 	@Override
-	public List<Product> showAllProducts(int pageNumber,int pageSize) {
+	public Product showProductById(Integer productId) throws ProductException {
+		log.debug("Calling findbyId method from ProductJpa Repository");
+		Optional<Product> opt = productRepo.findById(productId);
+		
+		if(opt.isPresent()) {
+			log.info("product got ");
+			return opt.get();
+		} else {
+			throw new ProductException("Product not found!");
+		}
+		
+	}
+
+	@Override
+	public List<Product> showAllProduct() throws ProductException {
+
+		List<Product> products = productRepo.findAll();
+		
+		if(products.isEmpty()) {
+			throw new ProductException("Products not exists!");
+		} else {
+			return products;
+		}
+		
+	}
+
+	@Override
+	public List<Product> searchByName(String productName) throws ProductException {
+		log.debug("Calling findByName method from ProductJpa Repository");
+		List<Product> pr= productRepo.searchProductByName(productName);
+		if(pr.isEmpty())throw new ProductException("Product not Available");
+		
+		log.info("product got");
+		return pr;
+	}
+
+	@Override
+	public List<Product> showAllProducts(int pageNumber, int pageSize) throws ProductException {
 		
 		Pageable page=  PageRequest.of(pageNumber, pageSize, Sort.by("productId"));
+		log.debug("Calling findAll method from ProductJpa Repository");
+		
 		List<Product> list= productRepo.findAll(page).getContent();
-		if(list.isEmpty())throw new SweetDelightBkException("No product are there");
+		if(list.isEmpty())throw new ProductException("No product are there");
+		
+		log.info("Allproduct got");
+		
 		return list;
 	}
 
 	@Override
-	public List<Product> searchByName(String productName) {
-		List<Product> list= productRepo.searchProductByName(productName.toLowerCase());
-		if(list.isEmpty())throw new SweetDelightBkException("No product is found by search by name "+productName);
-		return list;
-	}
-
-	//you can use for user
-	@Override
-	public Page<Product> showAllProductsByAvailable(int pageNumber,int pageSize) {
+	public Page<Product> showAllProductsByAvailable(int pageNumber, int pageSize) throws ProductException {
 		PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
+		
+		log.debug("Calling showAllAvailableProduct method from ProductJpa Repository");
 		Page<Product> page=productRepo.showAllAvailableProduct(pageRequest);
-		if(page.isEmpty())throw new SweetDelightBkException("No product are there which are available");
+		if(page.isEmpty())throw new ProductException("No product are there which are available");
+		
+		log.info("Allproduct got which is available");
+		
 		return page;
 	}
-
 	
-	
-	
-
 }

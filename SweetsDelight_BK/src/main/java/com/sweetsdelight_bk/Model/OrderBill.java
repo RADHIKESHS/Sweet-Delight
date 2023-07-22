@@ -1,43 +1,47 @@
 package com.sweetsdelight_bk.Model;
 
-import java.time.LocalDateTime;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 public class OrderBill {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer orderBillId;
 
-    private LocalDateTime localDate;
+    @NotNull(message = "Date should be there")
+    private LocalDate orderBill;
+    
+    @NotNull(message = "Total should not be null")
+    private Float totalCost;
 
-    private float totalCost;
+    @JsonIgnore
+    @OneToMany(mappedBy = "orderBill", cascade = CascadeType.ALL)
+    private List<SweetOrder> sweetOrderList = new ArrayList<>();
 
-    @OneToOne(mappedBy = "orderBill", cascade = CascadeType.ALL)
-    private SweetOrder sweetOrders;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    public OrderBill(LocalDateTime localDate, float totalCost) {
-        super();
-        this.localDate = LocalDateTime.now();
-        this.totalCost = totalCost;
+    @Override
+    public String toString() {
+        return "OrderBill{" +
+                "orderBillId=" + orderBillId +
+                ", orderBill=" + orderBill +
+                ", totalCost=" + totalCost +
+                '}';
     }
 }

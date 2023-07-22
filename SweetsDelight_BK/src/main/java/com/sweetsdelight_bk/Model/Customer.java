@@ -1,37 +1,62 @@
 package com.sweetsdelight_bk.Model;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
-public class Customer extends Users {
+@EqualsAndHashCode(callSuper = false)
+public class Customer extends User{
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
 
-    private String email;
+    @NotNull
+    @Size(min = 4, max = 30, message = "min length should be 4 and max should be 30")
+    private String customerName;
+	
+    @Column(unique = true)
+	@Email(message = "Invalid email format")
+	@NotBlank(message = "Email not be blank")
+	private String customerEmail;
+	
+	@NotBlank(message = "address neded")
+	private String Address;
+    
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private Set<SweetOrder> sweetOrder = new HashSet();
+    private Set<SweetOrder> sweetOrders = new HashSet<>();
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
-    private List<OrderBill> orderBill = new ArrayList<>();
-
-    @OneToOne(mappedBy = "customer")
+    @JsonIgnore
+    @OneToOne
     private Cart cart;
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "CustomerId=" + customerId +
+                ", Customername='" + customerName + '\'' +
+                '}';
+    }
 }
+

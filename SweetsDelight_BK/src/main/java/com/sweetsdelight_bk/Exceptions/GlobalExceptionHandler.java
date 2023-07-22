@@ -1,61 +1,111 @@
 package com.sweetsdelight_bk.Exceptions;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import lombok.extern.slf4j.Slf4j;
+import jakarta.validation.ConstraintViolationException;
 
-@ControllerAdvice
-@Slf4j
+@RestControllerAdvice
 public class GlobalExceptionHandler {
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<String> GeneralExceptionHandler(Exception se){
-		log.error("Internal Error Occurs");
-		return new ResponseEntity<>(se.getMessage() , HttpStatus.BAD_REQUEST) ;
-	}
 	
-	//to handle Not found exception 
-	@ExceptionHandler(NoHandlerFoundException.class)
-	public ResponseEntity<MyErrorDetails> mynotFoundHandler(NoHandlerFoundException nfe,WebRequest req)  {
-		log.error("NoHandlerFounds Error Occurs");
-		
-		MyErrorDetails err=new MyErrorDetails(nfe.getMessage(), req.getDescription(false),LocalDateTime.now());
-		
-		return new ResponseEntity<>(err,HttpStatus.NOT_FOUND);
-						
+
+	@ExceptionHandler(AdminException.class)
+	public ResponseEntity<ErrorDetails> myExpHandler(AdminException ie, WebRequest req)  {
+			ErrorDetails err=new ErrorDetails(LocalDateTime.now(), ie.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
 	}
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<MyErrorDetails> handleStudentException(MethodArgumentNotValidException exp) {
-		log.error("Validation Error Occurs");
-		List<ObjectError> allErrors= exp.getBindingResult().getAllErrors();
-		List<String> errorMessage= MethodArgumentNotValidException.errorsToStringList(allErrors);
-		
-		String error= String.join(", ", errorMessage);
-		
-		MyErrorDetails err = new MyErrorDetails("Validation Failed",error,LocalDateTime.now());
-
-		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
-
+	public ResponseEntity<ErrorDetails> myExpHandler(MethodArgumentNotValidException ie, WebRequest req)  {	
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), ie.getMessage(), req.getDescription(false));
+	 return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+	
 	}
+	
+	
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ErrorDetails> myExpHandler(ConstraintViolationException ie, WebRequest req)  {
 
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), ie.getMessage(), req.getDescription(false));
 
-	@ExceptionHandler(SweetDelightBkException.class)
-	public ResponseEntity<MyErrorDetails> SweetDelightBkErrorException(SweetDelightBkException exp, WebRequest req) {
-		log.error("SweetDelightBk runtime Error Occurs");
-		MyErrorDetails err = new MyErrorDetails(exp.getMessage(), req.getDescription(false),LocalDateTime.now());
-
-		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
-
+	 return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+	
 	}
+	
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ErrorDetails> myanyExphandler(Exception ie, WebRequest req)  {
+
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), ie.getMessage(), req.getDescription(false));
+
+	 return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+	
+	}
+	
+	@ExceptionHandler(NoHandlerFoundException.class)
+	public ResponseEntity<ErrorDetails> mynotFoundHandler(NoHandlerFoundException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	
+	@ExceptionHandler(CartsException.class)
+	public ResponseEntity<ErrorDetails> cartExceptionHandler(CartsException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	@ExceptionHandler(CategoryException.class)
+	public ResponseEntity<ErrorDetails> CategoryExceptionHandler(CategoryException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	@ExceptionHandler(CustomerException.class)
+	public ResponseEntity<ErrorDetails> CustomerExceptionHandler(CustomerException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	@ExceptionHandler(OrderBillException.class)
+	public ResponseEntity<ErrorDetails> OrderBillExceptionHandler(OrderBillException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	@ExceptionHandler(OrderException.class)
+	public ResponseEntity<ErrorDetails> OrderExceptionHandler(OrderException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	@ExceptionHandler(ProductException.class)
+	public ResponseEntity<ErrorDetails> ProductExceptionHandler(ProductException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	@ExceptionHandler(UserException.class)
+	public ResponseEntity<ErrorDetails> userExceptionHandler(UserException nfe,WebRequest req)  {				
+		ErrorDetails err=new ErrorDetails(LocalDateTime.now(), nfe.getMessage(), req.getDescription(false));
+		return new ResponseEntity<>(err,HttpStatus.BAD_REQUEST);
+						
+	}
+	
+	
 }

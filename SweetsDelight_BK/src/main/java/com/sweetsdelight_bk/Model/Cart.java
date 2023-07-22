@@ -3,14 +3,8 @@ package com.sweetsdelight_bk.Model;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,18 +15,16 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Cart {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer cartId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer cartId;
+	private Double grandTotal;
 
-    private Integer productCount;
+	@JsonIgnore
+	@OneToMany(mappedBy = "cart")
+	private List<Product> listProduct=new ArrayList<>();
+	
+	private Integer productCount;
+	private Double total;
 
-    private double grandTotal;
-
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
-    private List<Product> products = new ArrayList<>();
-
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
 }
