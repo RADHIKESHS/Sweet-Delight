@@ -11,6 +11,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,14 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Customer extends Users {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Customer(
+			@Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%!^&*()])[A-Za-z\\d@#$%!^&*()]{8,}$", message = "Password must have at least 1 uppercase letter, 1 lowercase letter, 1 special character, 1 numeric character, and be at least 8 characters long") @Size(min = 5, max = 15, message = "Username should be greater than 5 and less than 15") String username,
+			@Size(min = 8, message = "Password should be greater than 8") String password, String role) {
+		super(username, password, role);
+		// TODO Auto-generated constructor stub
+	}
+
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long customerId;
 
     private String email;
