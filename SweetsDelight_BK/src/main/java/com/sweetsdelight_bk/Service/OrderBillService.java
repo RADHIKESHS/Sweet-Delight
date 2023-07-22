@@ -2,16 +2,19 @@ package com.sweetsdelight_bk.Service;
 
 import java.util.List;
 
+import com.sweetsdelight_bk.Exceptions.OrderBillException;
 import com.sweetsdelight_bk.Model.OrderBill;
 
 public interface OrderBillService {
-	 OrderBill addOrderBill(OrderBill orderBill);
 
-	    OrderBill updateOrderBill(int id,OrderBill orderBill);
 
-	    OrderBill cancelOrderBill(int orderBillId);
+     OrderBill addOrderBill(OrderBill bill);   //cutomer
+     OrderBill   updateOrderBill(OrderBill bill) throws OrderBillException; // customer
+     OrderBill cancelOrderBill(Integer id) throws OrderBillException;   //customer && admin
 
-	    List<OrderBill> showAllOrderBills();
+     List<OrderBill> showAllOrderBills() throws OrderBillException;    //admin
 
-	    List<OrderBill> showAllOrderBills(int orderId);
+     OrderBill showOrderDetails(Integer id) throws OrderBillException;  //cutomer && admin
+
+
 }

@@ -1,48 +1,58 @@
 package com.sweetsdelight_bk.Model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapKeyJoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 @Entity
 public class SweetOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sweetOrderId;
 
-    private LocalDateTime createdDate;
-    
-    @Enumerated
-    private OrderStatus orderstatus;
-
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    private List<Product> sweetproduct = new ArrayList<>();
-//    error get
-
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "sweetOrder")
+    private List<Product> products = new ArrayList<>();
+    
+    
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "orderBill_id")
     private OrderBill orderBill;
+    
+    @NotNull
+    private LocalDate date;
+
+    @Override
+    public String toString() {
+        return "SweetOrder{" +
+                "sweetOrderId=" + sweetOrderId +
+                ", customer=" + customer +
+                ", date=" + date +
+                '}';
+    }
 }
+
