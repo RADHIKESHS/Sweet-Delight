@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sweetsdelight_bk.Exceptions.CartsException;
 import com.sweetsdelight_bk.Exceptions.CategoryException;
 import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Exceptions.ProductException;
+import com.sweetsdelight_bk.Model.Cart;
 import com.sweetsdelight_bk.Model.Category;
 import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Model.Product;
+import com.sweetsdelight_bk.Service.CartService;
 import com.sweetsdelight_bk.Service.CategoryService;
 import com.sweetsdelight_bk.Service.CustomerService;
 import com.sweetsdelight_bk.Service.ProductService;
@@ -41,6 +44,10 @@ public class CustomerController {
 	 @Autowired
 	 private CategoryService categoryService;
 	
+	 @Autowired
+	 private CartService cartService;
+	 
+	 
 	@PostMapping("/add")
 	public ResponseEntity<Customer> registerCustomer(@Valid @RequestBody Customer customer) throws CustomerException {
 		return new ResponseEntity<>(customerService.addCustomer(customer),HttpStatus.CREATED);
@@ -91,5 +98,14 @@ public class CustomerController {
 	}
 	
 	//cart
+	@PutMapping("/cart/{customerId}/{productId}")
+	public ResponseEntity<Cart> addProductToCart(@PathVariable Integer catId,@PathVariable Integer prodId)throws CartsException{
+		return new ResponseEntity<Cart>(cartService.addProductToCart(catId, prodId), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/cart/{customerId}")
+	public ResponseEntity<List<Product>> showCartsProduct(@PathVariable Integer customerId){
+		return new ResponseEntity<List<Product>>(cartService.getProductByCartId(customerId),HttpStatus.OK);
+	}
 	
 }
