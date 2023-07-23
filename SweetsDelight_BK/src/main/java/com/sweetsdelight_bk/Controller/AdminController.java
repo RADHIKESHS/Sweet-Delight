@@ -22,10 +22,12 @@ import com.sweetsdelight_bk.Exceptions.ProductException;
 import com.sweetsdelight_bk.Model.Category;
 import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Model.Product;
+import com.sweetsdelight_bk.Model.SweetOrder;
 import com.sweetsdelight_bk.Model.User;
 import com.sweetsdelight_bk.Service.AdminService;
 import com.sweetsdelight_bk.Service.CategoryService;
 import com.sweetsdelight_bk.Service.ProductService;
+import com.sweetsdelight_bk.Service.SweetOrderService;
 
 import jakarta.validation.Valid;
 
@@ -42,6 +44,9 @@ public class AdminController {
     
     @Autowired
     private CategoryService categoryService;
+    
+    @Autowired
+	private SweetOrderService service;
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers(){
@@ -166,5 +171,11 @@ public class AdminController {
 		return new ResponseEntity<>(category, HttpStatus.OK);
 	}
 	
+	///sweetorders
 	
+	@GetMapping("/orders")
+	public ResponseEntity<List<SweetOrder>> showAllOrders(){
+		return new ResponseEntity<>(service.showAllOrders(),HttpStatus.OK);
+
+	}
 }
