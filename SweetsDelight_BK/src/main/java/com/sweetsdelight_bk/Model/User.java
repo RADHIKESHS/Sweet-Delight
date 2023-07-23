@@ -28,7 +28,7 @@ public class User {
 	private Integer userId;
 	
 	@Column(unique = true)
-	private String userName;
+	private String username;
 	
 	@JsonProperty(access = Access.WRITE_ONLY)
 	@NotNull(message = "password should not be null")

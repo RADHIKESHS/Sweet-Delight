@@ -1,11 +1,13 @@
 package com.sweetsdelight_bk.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sweetsdelight_bk.Exceptions.CategoryException;
 import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Exceptions.ProductException;
+import com.sweetsdelight_bk.Exceptions.UserException;
 import com.sweetsdelight_bk.Model.Category;
 import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Model.Product;
+import com.sweetsdelight_bk.Model.User;
+import com.sweetsdelight_bk.Repository.UserRepo;
 import com.sweetsdelight_bk.Service.AdminService;
 import com.sweetsdelight_bk.Service.CategoryService;
 import com.sweetsdelight_bk.Service.CustomerService;
@@ -116,5 +121,6 @@ public class AdminAndCustomerController {
 			throws ProductException{
 		    	return new ResponseEntity<Page<Product>>(productService.showAllProductsByAvailable(pageNumber, pageSize), HttpStatus.OK);
 		}
+		
 		
 }

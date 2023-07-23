@@ -1,11 +1,13 @@
 package com.sweetsdelight_bk.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,12 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sweetsdelight_bk.Exceptions.CategoryException;
 import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Exceptions.ProductException;
+import com.sweetsdelight_bk.Exceptions.UserException;
 import com.sweetsdelight_bk.Model.Cart;
 import com.sweetsdelight_bk.Model.Category;
 import com.sweetsdelight_bk.Model.Customer;
@@ -26,6 +28,7 @@ import com.sweetsdelight_bk.Model.OrderBill;
 import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Model.SweetOrder;
 import com.sweetsdelight_bk.Model.User;
+import com.sweetsdelight_bk.Repository.UserRepo;
 import com.sweetsdelight_bk.Service.AdminService;
 import com.sweetsdelight_bk.Service.CartService;
 import com.sweetsdelight_bk.Service.CategoryService;
@@ -33,6 +36,7 @@ import com.sweetsdelight_bk.Service.CustomerService;
 import com.sweetsdelight_bk.Service.OrderBillService;
 import com.sweetsdelight_bk.Service.ProductService;
 import com.sweetsdelight_bk.Service.SweetOrderService;
+import com.sweetsdelight_bk.Service.UserService;
 
 import jakarta.validation.Valid;
 
@@ -61,6 +65,23 @@ public class AdminController {
     
     @Autowired
  	private SweetOrderService service;
+    
+    @Autowired
+ 	private UserService userservice;
+    
+	@Autowired
+	private UserRepo cRepo;
+	
+	@Autowired
+	private PasswordEncoder pc ;
+    
+    
+    
+    @PostMapping("/register")   //user
+    public ResponseEntity<User> registerCustomer(@Valid @RequestBody User admin) throws CustomerException {
+    	admin.setPassword(pc.encode(admin.getPassword()));
+        return new ResponseEntity<>(userservice.saveuser(admin), HttpStatus.CREATED);
+    }
     
     
     @GetMapping("/users")  //admin
@@ -179,6 +200,14 @@ public class AdminController {
 	public ResponseEntity<List<SweetOrder>> showAllOrders(){
 		return new ResponseEntity<>(service.showAllOrders(),HttpStatus.OK);
 
+	}
+    
+	@GetMapping("/logini")
+	public ResponseEntity<String> logInUserHandler(Authentication auth){
+		 Optional<User> opt= cRepo.findByUsername(auth.getName());
+		 if(opt.isEmpty()) throw new UserException("No user found") ;
+		 User user = opt.get();
+		 return new ResponseEntity<>(user.getUsername()+" Logged In Successfully", HttpStatus.ACCEPTED);
 	}
 
 }
