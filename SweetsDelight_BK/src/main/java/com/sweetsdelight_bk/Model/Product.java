@@ -1,6 +1,8 @@
 package com.sweetsdelight_bk.Model;
 
  
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotNull;
@@ -52,9 +55,9 @@ public class Product {
 	@ManyToOne(cascade = CascadeType.ALL)
 	private SweetOrder sweetOrder;
 	
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Cart cart;
+	 @JsonIgnore
+	  @ManyToMany(mappedBy = "products")
+	  private List<Cart> carts = new ArrayList<>();
 	
     
 	@ManyToOne(cascade = CascadeType.ALL)

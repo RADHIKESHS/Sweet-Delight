@@ -20,11 +20,14 @@ public class Cart {
 	private Integer cartId;
 	private Double grandTotal;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "cart",cascade = CascadeType.PERSIST)
-	private List<Product> listProduct=new ArrayList<>();
+    @JsonIgnore
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "cart_product",
+            joinColumns = @JoinColumn(name = "cart_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> products = new ArrayList<>();
 	
-	private Integer productCount=this.listProduct.size();
+	private Integer productCount=this.products.size();
 	private Double total;
 
 }

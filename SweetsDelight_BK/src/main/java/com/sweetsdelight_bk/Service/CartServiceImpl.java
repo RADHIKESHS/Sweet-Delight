@@ -3,6 +3,7 @@ package com.sweetsdelight_bk.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -87,28 +88,21 @@ public class CartServiceImpl implements CartService {
 		if(opt.isEmpty())throw new CartsException("No cart found");
 		Customer cust= opt.get();
 		Cart cart=cust.getCart();
+		Product product= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
+		List<Product> 	list= cart.getProducts();
+		list.add(product);
+		cart.setProducts(list);
+		cart.setProductCount(list.size());
 		
-		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
-		List<Product> list= cart.getListProduct();
-		Product prod=temp;
-//		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
-		int t=prod.getQuantity();
-		t++;
-		prod.setQuantity(t);
-		list.add(prod);
-		
-		int count=cart.getProductCount();
-		count++;
-		cart.setProductCount(count);
-		
-		Double total=cart.getTotal();
-		total+=temp.getPrice();
-		cart.setTotal(total);
-		cart.setListProduct(list);
-		cust.setCart(cart);
-		temp.setCart(cart);
-		customerRepository.save(cust);
-		return cartRepositoty.save(cart);
+
+		List<Double> total= list.stream().map(Product::getPrice).toList();
+		Double d=0.0;
+		for(Double i:total) {
+			d+=i;
+		}
+		cart.setTotal(d);
+		productRepository.save(product);
+    return cartRepositoty.save(cart);
 	}
 	
 	@Override
@@ -118,49 +112,42 @@ public class CartServiceImpl implements CartService {
 		Customer cust= opt.get();
 		Cart cart=cust.getCart();
 		
-		
-		List<Product> list= cart.getListProduct();
+
+	List<Product> list= cart.getProducts();
 		return list;
 	}
 
 	@Override
-	public Cart removeProductByCart(Integer customerId,Integer productId) {
-		Optional<Customer> opt=customerRepository.findById(customerId);
-		if(opt.isEmpty())throw new CartsException("No cart found");
-		Customer cust= opt.get();
-		Cart cart=cust.getCart();
-		
-		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
-		List<Product> list= cart.getListProduct();
-		
-//		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
-		int t=temp.getQuantity();
-		if(t<0 || cart.getTotal()<0)throw new CartsException("Unable to process");
-		if(t>1) {
-			t--;
-			temp.setQuantity(t);
-			
-		}else {
-			t--;
-			temp.setQuantity(t);
-			list.remove(temp);
-		}
-		
-		
-		int count=cart.getProductCount();
-		count--;
-		cart.setProductCount(count);
-		
-		Double total=cart.getTotal();
-		total-=temp.getPrice();
-		cart.setTotal(total);
-		cart.setListProduct(list);
-		cust.setCart(cart);
-		temp.setCart(cart);
-		customerRepository.save(cust);
-		return cartRepositoty.save(cart);
-		
+	public Cart removeProductByCart(Integer customerId, Integer productId) {
+	    Optional<Customer> opt = customerRepository.findById(customerId);
+	    if (opt.isEmpty()) {
+	        throw new CartsException("No cart found");
+	    }
+
+	    Customer cust = opt.get();
+	    Cart cart = cust.getCart();
+	    List<Product> list = cart.getProducts();
+
+	    // Remove the product with the given productId from the list
+	    List<Product> updatedList = list.stream()
+	                                    .filter(product -> !product.getProductid().equals(productId))
+	                                    .collect(Collectors.toList());
+
+	    // Update the cart with the new product list and calculate the total price
+	    double total = 0.0;
+	    for (Product product : updatedList) {
+	        total += product.getPrice();
+	    }
+	    cart.setProducts(updatedList);
+	    cart.setProductCount(updatedList.size());
+	    cart.setTotal(total);
+
+	    // Save the updated cart to the database
+	    return cartRepositoty.save(cart);
+
+	
 	}
+
 	
 	
 	
