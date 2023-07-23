@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class CartServiceImpl implements CartService {
 	
 	
-	List<Product> list;
+	
 	@Autowired
 	private CartRepo cartRepositoty;
 	
@@ -89,7 +89,7 @@ public class CartServiceImpl implements CartService {
 		Cart cart=cust.getCart();
 		
 		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
-		list= cart.getListProduct();
+		List<Product> list= cart.getListProduct();
 		Product prod=temp;
 //		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
 		int t=prod.getQuantity();
@@ -119,7 +119,7 @@ public class CartServiceImpl implements CartService {
 		Cart cart=cust.getCart();
 		
 		
-		list= cart.getListProduct();
+		List<Product> list= cart.getListProduct();
 		return list;
 	}
 
@@ -131,15 +131,18 @@ public class CartServiceImpl implements CartService {
 		Cart cart=cust.getCart();
 		
 		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
-		list= cart.getListProduct();
+		List<Product> list= cart.getListProduct();
 		
 //		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
 		int t=temp.getQuantity();
+		if(t<0 || cart.getTotal()<0)throw new CartsException("Unable to process");
 		if(t>1) {
 			t--;
 			temp.setQuantity(t);
 			
 		}else {
+			t--;
+			temp.setQuantity(t);
 			list.remove(temp);
 		}
 		
