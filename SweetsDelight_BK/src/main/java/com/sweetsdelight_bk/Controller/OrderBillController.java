@@ -24,11 +24,7 @@ public class OrderBillController {
     private OrderBillService service;
 
 
-    @PostMapping("/add")
-    public ResponseEntity<OrderBill> saveOrderBill(@RequestBody OrderBill orderBill){
-
-        return new ResponseEntity<>(service.addOrderBill(orderBill), HttpStatus.CREATED);
-    }
+   
 
 
     @DeleteMapping("/delete/{id}")
