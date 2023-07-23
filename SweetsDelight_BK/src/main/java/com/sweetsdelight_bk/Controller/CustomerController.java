@@ -24,10 +24,12 @@ import com.sweetsdelight_bk.Model.Cart;
 import com.sweetsdelight_bk.Model.Category;
 import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Model.Product;
+import com.sweetsdelight_bk.Model.SweetOrder;
 import com.sweetsdelight_bk.Service.CartService;
 import com.sweetsdelight_bk.Service.CategoryService;
 import com.sweetsdelight_bk.Service.CustomerService;
 import com.sweetsdelight_bk.Service.ProductService;
+import com.sweetsdelight_bk.Service.SweetOrderService;
 
 import jakarta.validation.Valid;
 
@@ -47,48 +49,58 @@ public class CustomerController {
 	 @Autowired
 	 private CartService cartService;
 	 
+	 @Autowired
+	 private SweetOrderService sweetservice;
+	 
 	 
 	@PostMapping("/add")
 	public ResponseEntity<Customer> registerCustomer(@Valid @RequestBody Customer customer) throws CustomerException {
 		return new ResponseEntity<>(customerService.addCustomer(customer),HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/update/{id}")
-	public ResponseEntity<Customer> updateCustomerDetailsById(@Valid @RequestBody Customer customer,@PathVariable("id") Integer id) throws CustomerException{
+	@PutMapping("/update/{customerid}")
+	public ResponseEntity<Customer> updateCustomerDetailsById(@Valid @RequestBody Customer customer,@PathVariable("customerid") Integer customerid) throws CustomerException{
 		
-		return new ResponseEntity<>(customerService.updateCustomer(customer, id),HttpStatus.OK);
+		return new ResponseEntity<>(customerService.updateCustomer(customer, customerid),HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Customer> deleteCustomer(@PathVariable("id") Integer id) throws CustomerException{
+	@DeleteMapping("/delete/{customerid}")
+	public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerid") Integer customerid) throws CustomerException{
 		
-		return new ResponseEntity<>(customerService.deleteCustomer(id),HttpStatus.OK);
+		return new ResponseEntity<>(customerService.deleteCustomer(customerid),HttpStatus.OK);
 	}
 	
-	@GetMapping("/customers")
+	@GetMapping("/customers/getallcustomers")
 	public ResponseEntity<List<Customer>> getAllCustomers() throws CustomerException{
 		return new ResponseEntity<>(customerService.showAllCustomers(),HttpStatus.FOUND);
 	}
 	
-	@GetMapping("/customer/{id}")
-	public ResponseEntity<Customer> showAllCustomerDetails(@PathVariable("id") Integer id) throws CustomerException{
-		return new ResponseEntity<>(customerService.showCustomerDetailsById(id),HttpStatus.FOUND);
+	@GetMapping("/customer/{customerid}")
+	public ResponseEntity<Customer> showAllCustomerDetails(@PathVariable("customerid") Integer customerid) throws CustomerException{
+		return new ResponseEntity<>(customerService.showCustomerDetailsById(customerid),HttpStatus.FOUND);
 	}
 	
 	//product
-	@GetMapping("/search")
+	@GetMapping("/searchbyname")
 	public ResponseEntity<List<Product>> searchProductByName(@RequestParam("productName") String productName)throws ProductException{
 		return new ResponseEntity<List<Product>>(productService.searchByName(productName),HttpStatus.OK);
 	}
 	
-	@GetMapping("/product/all")
-	public ResponseEntity<List<Product>> allProduct(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize)throws ProductException{
-		return new ResponseEntity<List<Product>>(productService.showAllProducts(pageNumber, pageSize),HttpStatus.OK);
+	@GetMapping("/product/getallproduct")
+	public ResponseEntity<List<Product>> allProduct(
+	        @RequestParam(defaultValue = "0") int pageNumber,
+	        @RequestParam(defaultValue = "50") int pageSize
+	) throws ProductException {
+	    return new ResponseEntity<>(productService.showAllProducts(pageNumber, pageSize), HttpStatus.OK);
 	}
 	
-	@GetMapping("/product/available")
-	public ResponseEntity<Page<Product>> allavailableProduct(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize)throws ProductException{
-		return new ResponseEntity<Page<Product>>(productService.showAllProductsByAvailable(pageNumber, pageSize),HttpStatus.OK);
+	@GetMapping("/product/getallavailableproduct")
+	public ResponseEntity<Page<Product>> allavailableProduct(
+	        @RequestParam(defaultValue = "0") int pageNumber,
+	        @RequestParam(defaultValue = "50") int pageSize
+	) throws ProductException 
+	{
+	    return new ResponseEntity<Page<Product>>(productService.showAllProductsByAvailable(pageNumber, pageSize), HttpStatus.OK);
 	}
 	
 	//category
@@ -98,19 +110,43 @@ public class CustomerController {
 	}
 	
 	//cart
-	@PutMapping("/cart/{customerId}/{productId}")
+	@PutMapping("/cart/addtocart/{customerId}/{productId}")
 	public ResponseEntity<Cart> addProductToCart(@PathVariable Integer customerId,@PathVariable Integer productId)throws CartsException{
 		return new ResponseEntity<Cart>(cartService.addProductToCart(customerId, productId), HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/cart/remove/{customerId}/{productId}")
+	@PutMapping("/cart/removefromcart/{customerId}/{productId}")
 	public ResponseEntity<Cart> removeProductToCart(@PathVariable Integer customerId,@PathVariable Integer productId)throws CartsException{
 		return new ResponseEntity<Cart>(cartService.removeProductByCart(customerId, productId), HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/cart/{customerId}")
+	@GetMapping("/cart/getfromcart/{customerId}")
 	public ResponseEntity<List<Product>> showCartsProduct(@PathVariable Integer customerId){
 		return new ResponseEntity<List<Product>>(cartService.getProductByCartId(customerId),HttpStatus.OK);
 	}
+	 @GetMapping("/getsortedandpaginatedproducts")
+	    public ResponseEntity<List<Product>> getAllProductsWithSort(
+	            @RequestParam(defaultValue = "0") int pageNumber,
+	            @RequestParam(defaultValue = "50") int pageSize,
+	            @RequestParam(defaultValue = "productName") String sortBy,
+	            @RequestParam(defaultValue = "ASC") String sortDirection
+	    ) throws ProductException {
+	        List<Product> products = productService.showAllProductswithsort(pageNumber, pageSize, sortBy, sortDirection);
+	        return ResponseEntity.ok(products);
+	    }
+	 
+	 @GetMapping("/price/{orderid}")
+		public ResponseEntity<String> totalPrice(@PathVariable("orderid") Integer orderid){
+			return new ResponseEntity<>(sweetservice.calculateTotalCost(orderid),HttpStatus.OK);
+		}
+	 
+	 @GetMapping("/getallorders/{customerId}")
+		public ResponseEntity<List<SweetOrder>> showAllOrderOfCustomer(@PathVariable Integer customerId) throws CustomerException{
+			return new ResponseEntity<List<SweetOrder>>(sweetservice.showAllOrderToCustomer(customerId),HttpStatus.OK);
+		}
+	 @GetMapping("/cart/{id}/product")
+		public ResponseEntity<List<Product>> getProductByCustomerId(@PathVariable Integer id){
+			return new ResponseEntity<List<Product>>(cartService.getProductByCartId(id),HttpStatus.OK);
+		}
 	
 }

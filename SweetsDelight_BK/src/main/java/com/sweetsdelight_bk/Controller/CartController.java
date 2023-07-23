@@ -53,7 +53,7 @@ public class CartController {
 		return new ResponseEntity<>(c,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/carts")
+	@GetMapping("/carts/allcarts")
 	public ResponseEntity<List<Cart>> allListOfCart(){
 		
 	       List<Cart> carts =cartService.showAllCarts();

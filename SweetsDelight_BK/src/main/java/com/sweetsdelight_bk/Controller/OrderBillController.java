@@ -41,15 +41,15 @@ public class OrderBillController {
     }
 
 
-    @GetMapping("/bills")
+    @GetMapping("/bills/allbills")
     public ResponseEntity<List<OrderBill>> showAllOrders(){
         return new ResponseEntity<>(service.showAllOrderBills(),HttpStatus.OK);
 
     }
 
-    @GetMapping("/orderbill/{id}")
-    public ResponseEntity<OrderBill> totalPrice(@PathVariable("id") Integer id){
-        return new ResponseEntity<>(service.showOrderDetails(id),HttpStatus.OK);
+    @GetMapping("/orderbill/{billid}")
+    public ResponseEntity<OrderBill> totalPrice(@PathVariable("billid") Integer billid){
+        return new ResponseEntity<>(service.showOrderDetails(billid),HttpStatus.OK);
     }
 
 
