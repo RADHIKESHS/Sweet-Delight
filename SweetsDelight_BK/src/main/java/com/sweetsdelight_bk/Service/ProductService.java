@@ -14,8 +14,6 @@ public interface ProductService {
 	
 	public Product addProduct(Product product,Integer categoryId) throws ProductException;//admin
 	
-	public Product updateProduct(Product product) throws ProductException;//admin
-	
 	public String deleteProduct(Integer productId) throws ProductException;//admin
 	
 	public Product showProductById(Integer productId) throws ProductException;//admin
@@ -30,5 +28,7 @@ public interface ProductService {
 	
 	public Product addProductToCategory(Integer productId,Integer categoryId)throws ProductException,CategoryException;
 	
-List<Product> showAllProductswithsort(int pageNumber, int pageSize, String sortBy, String sortDirection);
+	List<Product> showAllProductswithsort(int pageNumber, int pageSize, String sortBy, String sortDirection);
+	
+	Product updateProduct(int productId, Product product) throws ProductException;
 }

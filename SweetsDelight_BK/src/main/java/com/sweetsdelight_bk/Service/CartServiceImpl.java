@@ -94,6 +94,7 @@ public class CartServiceImpl implements CartService {
 		cart.setProducts(list);
 		cart.setProductCount(list.size());
 		
+
 		List<Double> total= list.stream().map(Product::getPrice).toList();
 		Double d=0.0;
 		for(Double i:total) {
@@ -101,7 +102,7 @@ public class CartServiceImpl implements CartService {
 		}
 		cart.setTotal(d);
 		productRepository.save(product);
-		return cartRepositoty.save(cart);
+    return cartRepositoty.save(cart);
 	}
 	
 	@Override
@@ -111,7 +112,7 @@ public class CartServiceImpl implements CartService {
 		Customer cust= opt.get();
 		Cart cart=cust.getCart();
 		
-		
+
 	List<Product> list= cart.getProducts();
 		return list;
 	}
@@ -143,6 +144,8 @@ public class CartServiceImpl implements CartService {
 
 	    // Save the updated cart to the database
 	    return cartRepositoty.save(cart);
+
+	
 	}
 
 	
