@@ -29,12 +29,15 @@ public class OrderBill {
     private LocalDate orderBill;
     
     @NotNull(message = "Total should not be null")
-    private Float totalCost;
+    private Double totalCost;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "orderBill", cascade = CascadeType.ALL)
-    private List<SweetOrder> sweetOrderList = new ArrayList<>();
-
+    @OneToOne(mappedBy = "orderBill", cascade = CascadeType.ALL)
+    private SweetOrder sweetOrderList;
+    
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Customer customer;
 
     @Override
     public String toString() {

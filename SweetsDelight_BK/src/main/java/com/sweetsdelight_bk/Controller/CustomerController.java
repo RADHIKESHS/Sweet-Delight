@@ -99,8 +99,13 @@ public class CustomerController {
 	
 	//cart
 	@PutMapping("/cart/{customerId}/{productId}")
-	public ResponseEntity<Cart> addProductToCart(@PathVariable Integer catId,@PathVariable Integer prodId)throws CartsException{
-		return new ResponseEntity<Cart>(cartService.addProductToCart(catId, prodId), HttpStatus.CREATED);
+	public ResponseEntity<Cart> addProductToCart(@PathVariable Integer customerId,@PathVariable Integer productId)throws CartsException{
+		return new ResponseEntity<Cart>(cartService.addProductToCart(customerId, productId), HttpStatus.CREATED);
+	}
+	
+	@PutMapping("/cart/remove/{customerId}/{productId}")
+	public ResponseEntity<Cart> removeProductToCart(@PathVariable Integer customerId,@PathVariable Integer productId)throws CartsException{
+		return new ResponseEntity<Cart>(cartService.removeProductByCart(customerId, productId), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/cart/{customerId}")

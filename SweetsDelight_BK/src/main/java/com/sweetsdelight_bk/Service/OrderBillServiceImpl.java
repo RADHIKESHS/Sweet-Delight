@@ -19,14 +19,7 @@ public class OrderBillServiceImpl implements OrderBillService {
     @Autowired
     private OrderBillRepo billRepo;
 
-    @Override
-    public OrderBill addOrderBill(OrderBill bill) {
-    	if(bill==null)throw new OrderBillException("Bill should not be null");
-    		log.debug("Calling save method from OrderBillJpa repository");
-    		OrderBill o= billRepo.save(bill);
-    		log.info("Bill saved successfully");
-    	   return o;
-    }
+   
 
     @Override
     public OrderBill updateOrderBill(OrderBill bill) {

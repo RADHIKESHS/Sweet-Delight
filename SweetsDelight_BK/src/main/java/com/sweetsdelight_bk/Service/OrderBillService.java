@@ -8,7 +8,7 @@ import com.sweetsdelight_bk.Model.OrderBill;
 public interface OrderBillService {
 
 
-     OrderBill addOrderBill(OrderBill bill);   //cutomer
+    
      OrderBill   updateOrderBill(OrderBill bill) throws OrderBillException; // customer
      OrderBill cancelOrderBill(Integer id) throws OrderBillException;   //customer && admin
 

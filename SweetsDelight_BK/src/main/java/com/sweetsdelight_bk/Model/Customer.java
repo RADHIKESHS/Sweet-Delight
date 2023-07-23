@@ -50,6 +50,11 @@ public class Customer extends User{
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
+    
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    private Set<OrderBill> bills = new HashSet<>();
 
     @Override
     public String toString() {

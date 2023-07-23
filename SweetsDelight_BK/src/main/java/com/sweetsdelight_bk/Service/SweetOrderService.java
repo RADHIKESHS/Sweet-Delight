@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Exceptions.OrderException;
+import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Model.SweetOrder;
 
 public interface SweetOrderService {
@@ -18,5 +19,7 @@ public interface SweetOrderService {
 	public List<SweetOrder>  showAllOrders();
 	
 	public String calculateTotalCost(Integer orderId) throws OrderException;
+	
+	public List<SweetOrder> showAllOrderToCustomer(Integer customerId) throws CustomerException;
 	
 }

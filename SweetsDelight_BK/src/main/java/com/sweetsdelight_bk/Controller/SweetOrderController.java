@@ -59,6 +59,10 @@ public class SweetOrderController {
 		return new ResponseEntity<>(service.calculateTotalCost(id),HttpStatus.OK);
 	}
 	
+	@GetMapping("/{customerId}")
+	public ResponseEntity<List<SweetOrder>> showAllOrderOfCustomer(@PathVariable Integer customerId) throws CustomerException{
+		return new ResponseEntity<List<SweetOrder>>(service.showAllOrderToCustomer(customerId),HttpStatus.OK);
+	}
 	
 	
 

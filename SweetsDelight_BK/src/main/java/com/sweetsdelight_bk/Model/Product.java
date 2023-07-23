@@ -61,6 +61,17 @@ public class Product {
 	private Category category;
 
 
+	@Override
+	public String toString() {
+		return "Product [productid=" + productid + ", name=" + name + ", photopath=" + photopath + ", price=" + price
+				+ ", description=" + description + ", available=" + available + ", quantity=" + quantity + "]";
+	}
+
+
+	
+	
+	
+
 	
 
 	

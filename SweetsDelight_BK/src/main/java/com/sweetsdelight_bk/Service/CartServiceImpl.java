@@ -90,15 +90,12 @@ public class CartServiceImpl implements CartService {
 		
 		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
 		list= cart.getListProduct();
-		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
-		if(quan.size()>0) {
-			int t=quan.get(0).getQuantity();
-			t++;
-			quan.get(0).setQuantity(t);
-		}else {
-			temp.setQuantity(1);
-			list.add(temp);
-		}
+		Product prod=temp;
+//		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
+		int t=prod.getQuantity();
+		t++;
+		prod.setQuantity(t);
+		list.add(prod);
 		
 		int count=cart.getProductCount();
 		count++;
@@ -125,6 +122,43 @@ public class CartServiceImpl implements CartService {
 		list= cart.getListProduct();
 		return list;
 	}
+
+	@Override
+	public Cart removeProductByCart(Integer customerId,Integer productId) {
+		Optional<Customer> opt=customerRepository.findById(customerId);
+		if(opt.isEmpty())throw new CartsException("No cart found");
+		Customer cust= opt.get();
+		Cart cart=cust.getCart();
+		
+		Product temp= productRepository.findById(productId).orElseThrow(()-> new CartsException("No proudct found"));
+		list= cart.getListProduct();
+		
+//		List<Product> quan= list.stream().filter(x->x.getName().equals(temp.getName())).toList();
+		int t=temp.getQuantity();
+		if(t>1) {
+			t--;
+			temp.setQuantity(t);
+			
+		}else {
+			list.remove(temp);
+		}
+		
+		
+		int count=cart.getProductCount();
+		count--;
+		cart.setProductCount(count);
+		
+		Double total=cart.getTotal();
+		total-=temp.getPrice();
+		cart.setTotal(total);
+		cart.setListProduct(list);
+		cust.setCart(cart);
+		temp.setCart(cart);
+		customerRepository.save(cust);
+		return cartRepositoty.save(cart);
+		
+	}
+	
 	
 	
 	

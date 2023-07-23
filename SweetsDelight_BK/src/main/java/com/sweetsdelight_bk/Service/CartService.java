@@ -14,4 +14,5 @@ public interface CartService {
 	public List<Cart> showAllCarts();
 	public Cart addProductToCart(Integer cartId,Integer productId)throws CartsException;
 	public List<Product> getProductByCartId(Integer customerId);
+	public Cart removeProductByCart(Integer customerId,Integer productId);
 }

@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,7 +46,7 @@ public class SweetOrder {
     
     @JsonIgnore
 
-    @ManyToOne
+    @OneToOne
     private OrderBill orderBill;
     
     @NotNull
