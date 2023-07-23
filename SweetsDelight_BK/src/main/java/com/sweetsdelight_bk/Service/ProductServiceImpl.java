@@ -32,6 +32,23 @@ public class ProductServiceImpl implements ProductService {
 	private CategoryRepo categoryRepo;
 	
 	@Override
+	public Product addProductToCategory(Integer productId, Integer categoryId)throws ProductException,CategoryException {
+		log.debug("Calling findbyId method from ProductJpa Repository");
+		Optional<Product> opt= productRepo.findById(productId);
+		if(opt.isEmpty()) {
+			throw new ProductException("No product found");
+		}
+		Product product=opt.get();
+		Optional<Category> cat= categoryRepo.findById(categoryId);
+		if(cat.isEmpty())throw new CategoryException("No category found");
+		Category category=cat.get();
+		product.setCategory(category);
+		return productRepo.save(product);
+	}
+	
+	
+	
+	@Override
 	public Product addProduct(Product product,Integer categoryId) throws ProductException {
 		if(product==null)throw new ProductException("product should not be null");
 		log.debug("Calling save method from ProductJpa Repository");
@@ -123,6 +140,10 @@ public class ProductServiceImpl implements ProductService {
 		return list;
 	}
 
+
+
+	
+	
 	@Override
 	public Page<Product> showAllProductsByAvailable(int pageNumber, int pageSize) throws ProductException {
 		PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
@@ -135,20 +156,31 @@ public class ProductServiceImpl implements ProductService {
 		
 		return page;
 	}
-
+	
+	
 	@Override
-	public Product addProductToCategory(Integer productId, Integer categoryId)throws ProductException,CategoryException {
-		log.debug("Calling findbyId method from ProductJpa Repository");
-		Optional<Product> opt= productRepo.findById(productId);
-		if(opt.isEmpty()) {
-			throw new ProductException("No product found");
-		}
-		Product product=opt.get();
-		Optional<Category> cat= categoryRepo.findById(categoryId);
-		if(cat.isEmpty())throw new CategoryException("No category found");
-		Category category=cat.get();
-		product.setCategory(category);
-		return productRepo.save(product);
-	}
+    public List<Product> showAllProductswithsort(int pageNumber, int pageSize, String sortBy, String sortDirection) {
+        Sort.Direction direction = getSortDirection(sortDirection);
+        Sort sort = Sort.by(direction, sortBy);
+        Pageable page = PageRequest.of(pageNumber, pageSize, sort);
+        log.debug("Calling findAll method from ProductJpa Repository");
+
+        Page<Product> productPage = productRepo.findAll(page);
+        List<Product> products = productPage.getContent();
+
+        log.info("All products retrieved and sorted by: " + sortBy + " in " + sortDirection + " order");
+
+        return products;
+    }
+
+    private Sort.Direction getSortDirection(String sortDirection) {
+        if (sortDirection.equalsIgnoreCase("asc")) {
+            return Sort.Direction.ASC;
+        } else if (sortDirection.equalsIgnoreCase("desc")) {
+            return Sort.Direction.DESC;
+        } else {
+            return Sort.Direction.ASC;
+        }
+    }
 	
 }

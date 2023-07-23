@@ -27,39 +27,39 @@ public class SweetOrderController {
 	@Autowired
 	private SweetOrderService service;
 	
-	@PostMapping("/add/{id}")
-	public ResponseEntity<String>  saveSweetOrder(@PathVariable Integer id) throws CustomerException{
+	@PostMapping("/add/{customerid}")
+	public ResponseEntity<String>  saveSweetOrder(@PathVariable Integer customerid) throws CustomerException{
 		  
-		return new ResponseEntity<>(service.placeOrder(id),HttpStatus.CREATED);
+		return new ResponseEntity<>(service.placeOrder(customerid),HttpStatus.CREATED);
 	}
 	
 
-	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<String> deleteOrder(@PathVariable("id") Integer id){
-		return new ResponseEntity<>(service.cancelSweetOrder(id),HttpStatus.OK);
+	@DeleteMapping("/delete/{orderid}")
+	public ResponseEntity<String> deleteOrder(@PathVariable("orderid") Integer orderid){
+		return new ResponseEntity<>(service.cancelSweetOrder(orderid),HttpStatus.OK);
 
 	}
 	
 	
-	@PutMapping("/update")
+	@PutMapping("/updateorder")
 	public ResponseEntity<SweetOrder> updateSweetOrder(@RequestBody SweetOrder order){
 		return new ResponseEntity<>(service.updateSweetOrder(order),HttpStatus.OK);
 
 	}
 	
 	
-	@GetMapping("/orders")
+	@GetMapping("/orders/allorders")
 	public ResponseEntity<List<SweetOrder>> showAllOrders(){
 		return new ResponseEntity<>(service.showAllOrders(),HttpStatus.OK);
 
 	}
 	
-	@GetMapping("/price/{id}")
-	public ResponseEntity<String> totalPrice(@PathVariable("id") Integer id){
-		return new ResponseEntity<>(service.calculateTotalCost(id),HttpStatus.OK);
+	@GetMapping("/price/{orderid}")
+	public ResponseEntity<String> totalPrice(@PathVariable("orderid") Integer orderid){
+		return new ResponseEntity<>(service.calculateTotalCost(orderid),HttpStatus.OK);
 	}
 	
-	@GetMapping("/{customerId}")
+	@GetMapping("/getallorders/{customerId}")
 	public ResponseEntity<List<SweetOrder>> showAllOrderOfCustomer(@PathVariable Integer customerId) throws CustomerException{
 		return new ResponseEntity<List<SweetOrder>>(service.showAllOrderToCustomer(customerId),HttpStatus.OK);
 	}

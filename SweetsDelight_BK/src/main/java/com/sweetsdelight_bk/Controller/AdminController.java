@@ -19,13 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sweetsdelight_bk.Exceptions.CategoryException;
 import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Exceptions.ProductException;
+import com.sweetsdelight_bk.Model.Cart;
 import com.sweetsdelight_bk.Model.Category;
 import com.sweetsdelight_bk.Model.Customer;
+import com.sweetsdelight_bk.Model.OrderBill;
 import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Model.SweetOrder;
 import com.sweetsdelight_bk.Model.User;
 import com.sweetsdelight_bk.Service.AdminService;
+import com.sweetsdelight_bk.Service.CartService;
 import com.sweetsdelight_bk.Service.CategoryService;
+import com.sweetsdelight_bk.Service.CustomerService;
+import com.sweetsdelight_bk.Service.OrderBillService;
 import com.sweetsdelight_bk.Service.ProductService;
 import com.sweetsdelight_bk.Service.SweetOrderService;
 
@@ -48,6 +53,16 @@ public class AdminController {
     @Autowired
 	private SweetOrderService service;
 
+    @Autowired
+    private OrderBillService orderbillservice;
+    
+    @Autowired
+    private CartService cartser;
+    
+    
+    @Autowired
+    private CustomerService customerservice;
+    
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers(){
 
@@ -126,15 +141,7 @@ public class AdminController {
 		return new ResponseEntity<List<Product>>(productService.searchByName(productName),HttpStatus.OK);
 	}
 	
-	@GetMapping("/product/all")
-	public ResponseEntity<List<Product>> allProduct(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize)throws ProductException{
-		return new ResponseEntity<List<Product>>(productService.showAllProducts(pageNumber, pageSize),HttpStatus.OK);
-	}
-	
-	@GetMapping("/product/available")
-	public ResponseEntity<Page<Product>> allavailableProduct(@RequestParam("pageNumber") int pageNumber,@RequestParam("pageSize") int pageSize)throws ProductException{
-		return new ResponseEntity<Page<Product>>(productService.showAllProductsByAvailable(pageNumber, pageSize),HttpStatus.OK);
-	}
+
 	///Category
 	
 	@PostMapping("/category/add")
@@ -173,9 +180,71 @@ public class AdminController {
 	
 	///sweetorders
 	
-	@GetMapping("/orders")
+	
+	
+	
+	@GetMapping("/product/getallproduct")
+	public ResponseEntity<List<Product>> allProduct(
+	        @RequestParam(defaultValue = "0") int pageNumber,
+	        @RequestParam(defaultValue = "50") int pageSize
+	) throws ProductException {
+	    return new ResponseEntity<>(productService.showAllProducts(pageNumber, pageSize), HttpStatus.OK);
+	}
+
+	
+	@GetMapping("/product/getallavailableproduct")
+	public ResponseEntity<Page<Product>> allavailableProduct(
+	        @RequestParam(defaultValue = "0") int pageNumber,
+	        @RequestParam(defaultValue = "50") int pageSize
+	) throws ProductException 
+	{
+	    return new ResponseEntity<Page<Product>>(productService.showAllProductsByAvailable(pageNumber, pageSize), HttpStatus.OK);
+	}
+	
+	
+    @GetMapping("/getsortedandpaginated")
+    public ResponseEntity<List<Product>> getAllProductsWithSort(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "50") int pageSize,
+            @RequestParam(defaultValue = "productName") String sortBy,
+            @RequestParam(defaultValue = "ASC") String sortDirection
+    ) throws ProductException {
+        List<Product> products = productService.showAllProductswithsort(pageNumber, pageSize, sortBy, sortDirection);
+        return ResponseEntity.ok(products);
+    }
+    @GetMapping("/orders/allorders")
 	public ResponseEntity<List<SweetOrder>> showAllOrders(){
 		return new ResponseEntity<>(service.showAllOrders(),HttpStatus.OK);
 
 	}
+    
+    @GetMapping("/bills/allbills")
+    public ResponseEntity<List<OrderBill>> showAllOrdersbill(){
+        return new ResponseEntity<>(orderbillservice.showAllOrderBills(),HttpStatus.OK);
+
+    }
+    @GetMapping("/orderbill/{billid}")
+    public ResponseEntity<OrderBill> totalPrice(@PathVariable("billid") Integer billid){
+        return new ResponseEntity<>(orderbillservice.showOrderDetails(billid),HttpStatus.OK);
+    }
+    @GetMapping("/carts/allcarts")
+	public ResponseEntity<List<Cart>> allListOfCart(){
+		
+	       List<Cart> carts =cartser.showAllCarts();
+		
+		if(!carts.isEmpty())
+		{
+			return new ResponseEntity<>(carts,HttpStatus.OK);
+		}
+		else
+		{
+			throw new IllegalArgumentException("Carts List is Empty");
+		}
+	}
+    @DeleteMapping("/delete/{customerid}")
+	public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerid") Integer customerid) throws CustomerException{
+		
+		return new ResponseEntity<>(customerservice.deleteCustomer(customerid),HttpStatus.OK);
+	}
+
 }

@@ -30,4 +30,5 @@ public interface ProductService {
 	
 	public Product addProductToCategory(Integer productId,Integer categoryId)throws ProductException,CategoryException;
 	
+List<Product> showAllProductswithsort(int pageNumber, int pageSize, String sortBy, String sortDirection);
 }
