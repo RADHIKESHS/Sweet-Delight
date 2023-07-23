@@ -9,11 +9,11 @@ public interface CategoryService {
 
 	public Category addCategory(Category category) throws CategoryException;
 	
-	public Category updateCategory(Category category) throws CategoryException;
-	
 	public String deleteCategory(Integer categoryId) throws CategoryException;
 
 	public Category showCategoryById(Integer categoryId) throws CategoryException;
 	
 	public List<Category> showAllCategory() throws CategoryException;
+
+	Category updateCategory(int categoryId, Category category) throws CategoryException;
 }

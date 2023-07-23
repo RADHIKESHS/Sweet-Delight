@@ -37,7 +37,7 @@ import com.sweetsdelight_bk.Service.SweetOrderService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/sweetDelight/admin")
 public class AdminController {
 
 
@@ -51,19 +51,19 @@ public class AdminController {
     private CategoryService categoryService;
     
     @Autowired
-	private SweetOrderService service;
-
+    private CartService cartser;
+    
+    @Autowired
+    private CustomerService customerService;
+    
     @Autowired
     private OrderBillService orderbillservice;
     
     @Autowired
-    private CartService cartser;
+ 	private SweetOrderService service;
     
     
-    @Autowired
-    private CustomerService customerservice;
-    
-    @GetMapping("/users")
+    @GetMapping("/users")  //admin
     public ResponseEntity<List<User>> getAllUsers(){
 
         List<User> users =adminService.allUsers();
@@ -72,48 +72,37 @@ public class AdminController {
     }
 
 
-    @GetMapping("/customers")
+    @GetMapping("/customers")   //admin
     public ResponseEntity<List<Customer>> getAllCustomer() throws CustomerException {
 
         List<Customer> customers =adminService.allCustomers();
         return new ResponseEntity<>(customers, HttpStatus.FOUND);
 
     }
-
-
-    @GetMapping("/products")
-    public ResponseEntity<List<Product>> getAllProducts() throws ProductException {
-
-        List<Product> products =adminService.allProducts();
-        return new ResponseEntity<>(products, HttpStatus.FOUND);
-
-    }
-
-    @GetMapping("/categories")
-    public ResponseEntity<List<Category>> getAllCategories(){
-
-        List<Category> categories =adminService.allCategories();
-        return new ResponseEntity<>(categories, HttpStatus.FOUND);
-
-    }
     
-    @PostMapping("/product/add/{id}")
-	public ResponseEntity<Product> addProductHandler(@Valid @RequestBody Product product,@PathVariable Integer id) throws ProductException {
+    @GetMapping("/customers/{customerId}")      // admin
+	public ResponseEntity<Customer> showCustomerDetails(@PathVariable("customerid") Integer customerid) throws CustomerException{
+		return new ResponseEntity<>(customerService.showCustomerDetailsById(customerid),HttpStatus.FOUND);
+	}
+
+    
+    @PostMapping("/products/{categoryId}")    // admin 
+	public ResponseEntity<Product> addProductHandler(@Valid @RequestBody Product product,@PathVariable Integer categoryId) throws ProductException {
 		
-		Product savedProduct = productService.addProduct(product,id);
+		Product savedProduct = productService.addProduct(product,categoryId);
 		
 		return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
 	}
 
-    @PutMapping("/product/update")
-	public ResponseEntity<Product> updateProductHandler(@RequestBody Product product) throws ProductException {
+    @PutMapping("/product/update/{productId}")   //admin
+	public ResponseEntity<Product> updateProductHandler(@PathVariable("productId") int productId,@RequestBody Product product) throws ProductException {
 		
-		Product updatedProduct = productService.updateProduct(product);
+		Product updatedProduct = productService.updateProduct(productId,product);
 		
 		return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
 	}
     
-    @DeleteMapping("/product/delete/{productId}")
+    @DeleteMapping("/products/{productId}")   //admin
 	public ResponseEntity<String> deleteProductHandler(@PathVariable("productId") Integer productId) throws ProductException {
 		
 		String result = productService.deleteProduct(productId);
@@ -122,7 +111,7 @@ public class AdminController {
 	}
 	
 	
-	@GetMapping("/product/{productId}")
+    @GetMapping("/products/{productId}")       //admin
 	public ResponseEntity<Product> showProductById(@PathVariable("productId") Integer productId) throws ProductException {
 		
 		Product product = productService.showProductById(productId);
@@ -131,20 +120,13 @@ public class AdminController {
 	}
 	
 	
-	@PutMapping("/assign_product_category/{prodId}/{catId}")
+    @PutMapping("/products/{prodId}/categories/{catId}")    //admin 
 	public ResponseEntity<Product> addProductToCategory(@PathVariable Integer prodId,@PathVariable Integer catId)throws ProductException,CategoryException{
 		return new ResponseEntity<Product>(productService.addProductToCategory(prodId, catId), HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/search")
-	public ResponseEntity<List<Product>> searchProductByName(@RequestParam("productName") String productName)throws ProductException{
-		return new ResponseEntity<List<Product>>(productService.searchByName(productName),HttpStatus.OK);
-	}
 	
-
-	///Category
-	
-	@PostMapping("/category/add")
+    @PostMapping("/category")    // admin
 	public ResponseEntity<Category> addCategoryHandler(@RequestBody Category category){
 		
 		Category savedCategory = categoryService.addCategory(category);
@@ -153,98 +135,50 @@ public class AdminController {
 	}
 	
 	
-	@PutMapping("/category/update")
-	public ResponseEntity<Category> updateCategoryHandler(@RequestBody Category category) {
+    @PutMapping("/categories/update/{categoryId}")  //admin
+	public ResponseEntity<Category> updateCategoryHandler(@PathVariable("categoryId") int categoryId ,@RequestBody Category category) {
 		
-		Category updatedCategory = categoryService.updateCategory(category);
+		Category updatedCategory = categoryService.updateCategory(categoryId,category);
 		
 		return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
 	}
 	
 	
-	@DeleteMapping("/category/delete/{id}")
+    @DeleteMapping("/categories/{categoryId}") //admin
 	public ResponseEntity<String> deleteCategoryHandler(@PathVariable("id") Integer id) {
 		
 		String result = categoryService.deleteCategory(id);
 		
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
-	
-	@GetMapping("/category/{id}")
-	public ResponseEntity<Category> showCategoryByIdHandler(@PathVariable("id") Integer id) {
-		
-		Category category = categoryService.showCategoryById(id);
-		
-		return new ResponseEntity<>(category, HttpStatus.OK);
-	}
-	
-	///sweetorders
-	
-	
-	
-	
-	@GetMapping("/product/getallproduct")
-	public ResponseEntity<List<Product>> allProduct(
-	        @RequestParam(defaultValue = "0") int pageNumber,
-	        @RequestParam(defaultValue = "50") int pageSize
-	) throws ProductException {
-	    return new ResponseEntity<>(productService.showAllProducts(pageNumber, pageSize), HttpStatus.OK);
-	}
 
-	
-	@GetMapping("/product/getallavailableproduct")
-	public ResponseEntity<Page<Product>> allavailableProduct(
-	        @RequestParam(defaultValue = "0") int pageNumber,
-	        @RequestParam(defaultValue = "50") int pageSize
-	) throws ProductException 
-	{
-	    return new ResponseEntity<Page<Product>>(productService.showAllProductsByAvailable(pageNumber, pageSize), HttpStatus.OK);
-	}
-	
-	
-    @GetMapping("/getsortedandpaginated")
-    public ResponseEntity<List<Product>> getAllProductsWithSort(
-            @RequestParam(defaultValue = "0") int pageNumber,
-            @RequestParam(defaultValue = "50") int pageSize,
-            @RequestParam(defaultValue = "productName") String sortBy,
-            @RequestParam(defaultValue = "ASC") String sortDirection
-    ) throws ProductException {
-        List<Product> products = productService.showAllProductswithsort(pageNumber, pageSize, sortBy, sortDirection);
-        return ResponseEntity.ok(products);
-    }
-    @GetMapping("/orders/allorders")
-	public ResponseEntity<List<SweetOrder>> showAllOrders(){
-		return new ResponseEntity<>(service.showAllOrders(),HttpStatus.OK);
-
+    
+    @GetMapping("/allcarts")   // admin
+	public ResponseEntity<List<Cart>> allListOfCart(){
+		
+	    List<Cart> carts =cartser.showAllCarts();		
+		if(!carts.isEmpty()){
+			return new ResponseEntity<>(carts,HttpStatus.OK);
+		}else{
+			throw new IllegalArgumentException("Carts List is Empty");
+		}
 	}
     
-    @GetMapping("/bills/allbills")
+    @GetMapping("/bills/allbills")       //  admin 
     public ResponseEntity<List<OrderBill>> showAllOrdersbill(){
         return new ResponseEntity<>(orderbillservice.showAllOrderBills(),HttpStatus.OK);
 
     }
-    @GetMapping("/orderbill/{billid}")
-    public ResponseEntity<OrderBill> totalPrice(@PathVariable("billid") Integer billid){
-        return new ResponseEntity<>(orderbillservice.showOrderDetails(billid),HttpStatus.OK);
+    
+    @GetMapping("/orderbill/{customerbillid}")    // admin   
+    public ResponseEntity<OrderBill> totalPrice(@PathVariable("customerbillid") Integer customerbillid){
+        return new ResponseEntity<>(orderbillservice.showOrderDetails(customerbillid),HttpStatus.OK);
     }
-    @GetMapping("/carts/allcarts")
-	public ResponseEntity<List<Cart>> allListOfCart(){
-		
-	       List<Cart> carts =cartser.showAllCarts();
-		
-		if(!carts.isEmpty())
-		{
-			return new ResponseEntity<>(carts,HttpStatus.OK);
-		}
-		else
-		{
-			throw new IllegalArgumentException("Carts List is Empty");
-		}
-	}
-    @DeleteMapping("/delete/{customerid}")
-	public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerid") Integer customerid) throws CustomerException{
-		
-		return new ResponseEntity<>(customerservice.deleteCustomer(customerid),HttpStatus.OK);
+    
+    @GetMapping("/orders/allorders")      //admin 
+	public ResponseEntity<List<SweetOrder>> showAllOrders(){
+		return new ResponseEntity<>(service.showAllOrders(),HttpStatus.OK);
+
 	}
 
 }

@@ -37,7 +37,7 @@ public class CategoryController {
 	@PutMapping("/update")
 	public ResponseEntity<Category> updateCategoryHandler(@RequestBody Category category) {
 		
-		Category updatedCategory = categoryService.updateCategory(category);
+		Category updatedCategory = categoryService.updateCategory(category.getCategoryid(),category);
 		
 		return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
 	}

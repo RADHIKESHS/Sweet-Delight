@@ -33,8 +33,8 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category updateCategory(Category category) throws CategoryException {
-		Optional<Category> opt = categoryRepo.findById(category.getCategoryid());
+	public Category updateCategory(int categoryId,  Category category) throws CategoryException {
+		Optional<Category> opt = categoryRepo.findById(categoryId);
 		
 		if(opt.isPresent()) {
 			log.debug("Calling save method from CategoryJpa repository");

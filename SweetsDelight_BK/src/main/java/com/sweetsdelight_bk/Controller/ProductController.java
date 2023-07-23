@@ -44,7 +44,7 @@ public class ProductController {
 	@PutMapping("/update")
 	public ResponseEntity<Product> updateProductHandler(@RequestBody Product product) throws ProductException {
 		
-		Product updatedProduct = productService.updateProduct(product);
+		Product updatedProduct = productService.updateProduct(product.getProductid(),product);
 		
 		return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
 	}

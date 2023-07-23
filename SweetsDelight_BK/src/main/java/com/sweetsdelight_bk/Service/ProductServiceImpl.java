@@ -60,9 +60,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Product updateProduct(Product product) throws ProductException {
+	public Product updateProduct(int productId,Product product) throws ProductException {
 		
-		Optional<Product> opt = productRepo.findById(product.getProductid());
+		Optional<Product> opt = productRepo.findById(productId);
 		
 		if(opt.isPresent()) {
 			log.debug("Calling save method from ProductJpa Repository");
