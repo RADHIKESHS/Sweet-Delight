@@ -46,7 +46,7 @@ public class SweetOrderServiceImpl  implements SweetOrderService {
         Customer cus=customerrepo.findById(customerid).orElseThrow(()->new CustomerException("No customer available"));
 		log.debug("Calling save method from SweetJpa Repository");
 		Cart cart=cus.getCart();
-		List<Product> list=cart.getListProduct();
+		List<Product> list=cart.getProducts();
 		List<Product> ans=new ArrayList<>();
 		for(Product i: list) {
 			if(i.getQuantity()>=1) {
@@ -64,7 +64,7 @@ public class SweetOrderServiceImpl  implements SweetOrderService {
 		bill.setTotalCost(cart.getTotal());
 		bill.setSweetOrderList(order);
 		billRepo.save(bill);
-		cart.setListProduct(new ArrayList<>());
+		cart.setProducts(new ArrayList<>());
 		cart.setTotal(0.0);
 		cart.setProductCount(0);
 		order.setOrderBill(bill);

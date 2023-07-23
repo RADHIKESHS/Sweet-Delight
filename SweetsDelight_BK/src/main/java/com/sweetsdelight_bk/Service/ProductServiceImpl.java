@@ -66,6 +66,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		if(opt.isPresent()) {
 			log.debug("Calling save method from ProductJpa Repository");
+			product.setCategory( opt.get().getCategory());
 			Product updatedProduct = productRepo.save(product);
 			log.info("product updated successfully");	
 			return updatedProduct;
