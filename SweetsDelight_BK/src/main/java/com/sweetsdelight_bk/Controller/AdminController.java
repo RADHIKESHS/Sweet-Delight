@@ -201,13 +201,16 @@ public class AdminController {
 		return new ResponseEntity<>(service.showAllOrders(),HttpStatus.OK);
 
 	}
-    
-	@GetMapping("/logini")
-	public ResponseEntity<String> logInUserHandler(Authentication auth){
-		 Optional<User> opt= cRepo.findByUsername(auth.getName());
-		 if(opt.isEmpty()) throw new UserException("No user found") ;
-		 User user = opt.get();
-		 return new ResponseEntity<>(user.getUsername()+" Logged In Successfully", HttpStatus.ACCEPTED);
+
+ 	
+	@PutMapping("/{customerId}/role/{role}")
+	public ResponseEntity<Customer> logInUserHandler(@PathVariable Integer customerId, @PathVariable String role) throws CustomerException{
+		 return new ResponseEntity<>(customerService.updateCustomerRole(customerId, role), HttpStatus.ACCEPTED);
+	}
+	
+	@PutMapping("/{orderId}/status/{status}")
+	public ResponseEntity<SweetOrder> logInUserHandler(@PathVariable Integer orderId, @PathVariable SweetOrder.OrderStatus status) throws CustomerException{
+		 return new ResponseEntity<>(service.updateSweetOrderStatus(orderId, status), HttpStatus.ACCEPTED);
 	}
 
 }

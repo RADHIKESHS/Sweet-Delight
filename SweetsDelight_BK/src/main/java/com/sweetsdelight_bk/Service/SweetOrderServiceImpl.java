@@ -16,6 +16,7 @@ import com.sweetsdelight_bk.Model.Customer;
 import com.sweetsdelight_bk.Model.OrderBill;
 import com.sweetsdelight_bk.Model.Product;
 import com.sweetsdelight_bk.Model.SweetOrder;
+import com.sweetsdelight_bk.Model.SweetOrder.OrderStatus;
 import com.sweetsdelight_bk.Repository.CartRepo;
 import com.sweetsdelight_bk.Repository.CustomerRepo;
 import com.sweetsdelight_bk.Repository.OrderBillRepo;
@@ -139,5 +140,18 @@ public class SweetOrderServiceImpl  implements SweetOrderService {
 			System.out.println(i.getProducts());
 		}
 		return orderRepo.findByCustomer(customer);
+	}
+
+	@Override
+	public SweetOrder updateSweetOrderStatus(Integer orderId, OrderStatus status) throws OrderException {
+    	Optional<SweetOrder> optional = orderRepo.findById(orderId);
+    	
+    	if(optional.isEmpty()) throw new OrderException("Order not found");
+    	
+    	SweetOrder order = optional.get();
+    	
+    	order.setStatus(status);
+    	
+    	return orderRepo.save(order);
 	}
 }

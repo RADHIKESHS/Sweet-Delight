@@ -31,4 +31,6 @@ public interface ProductService {
 	List<Product> showAllProductswithsort(int pageNumber, int pageSize, String sortBy, String sortDirection);
 	
 	Product updateProduct(int productId, Product product) throws ProductException;
+	
+	public Page<Product> showAllProductByCategory(String category, int pageNumber, int pageSize) throws ProductException,CategoryException;
 }

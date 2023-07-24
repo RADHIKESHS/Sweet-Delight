@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.webjars.NotFoundException;
 
 import com.sweetsdelight_bk.Exceptions.CustomerException;
 import com.sweetsdelight_bk.Model.Cart;
@@ -25,8 +26,18 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	private CartRepo cartrepo;
 	
-	
-
+	@Override
+    public Customer updateCustomerRole(Integer customerId, String role) throws CustomerException{
+    	Optional<Customer> optional = customerRepo.findById(customerId);
+    	
+    	if(optional.isEmpty()) throw new CustomerException("User not found");
+    	
+    	Customer customer = optional.get();
+    	
+    	customer.setRole(role);
+    	
+    	return customerRepo.save(customer);
+    }
 	@Override
 	public Customer addCustomer(Customer customer) throws CustomerException {
 		Optional<Customer> c=customerRepo.findByCustomerEmail(customer.getCustomerEmail());
@@ -35,6 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		log.debug("Calling save method from CustomerJpa Repository");
 
+		customer.setRole("USER");
 		
 		customer.setCustomerId(customer.getUserId());
 		Cart cart=new Cart();

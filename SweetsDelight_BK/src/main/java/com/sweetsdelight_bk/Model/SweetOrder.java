@@ -27,6 +27,19 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 public class SweetOrder {
+	public enum OrderStatus {
+	    PENDING,
+	    PROCESSING,
+	    SHIPPED,
+	    DELIVERED,
+	    ON_HOLD,
+	    BACKORDERED,
+	    CANCELLED,
+	    RETURNED,
+	    REFUNDED,
+	    COMPLETED
+	}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer sweetOrderId;
@@ -43,14 +56,14 @@ public class SweetOrder {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "sweetOrder")
     private List<Product> products = new ArrayList<>();
     
-    
-    @JsonIgnore
-
     @OneToOne
     private OrderBill orderBill;
     
     @NotNull
     private LocalDateTime date;
+    
+    @NotNull
+    private OrderStatus status = OrderStatus.PENDING;
 
     @Override
     public String toString() {

@@ -17,5 +17,5 @@ public interface CustomerService {
 	
 	public Customer showCustomerDetailsById(Integer userId) throws CustomerException;  //admin
 	
-
+	public Customer updateCustomerRole(Integer customerId, String role) throws CustomerException;
 }

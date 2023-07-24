@@ -183,5 +183,17 @@ public class ProductServiceImpl implements ProductService {
             return Sort.Direction.ASC;
         }
     }
+
+
+
+	@Override
+	public Page<Product> showAllProductByCategory(String category, int pageNumber, int pageSize) throws ProductException, CategoryException {
+		PageRequest pageRequest= PageRequest.of(pageNumber, pageSize);
+		Page<Product> page=productRepo.showAllProductByCategory(category, pageRequest);
+		if(page.isEmpty())throw new ProductException("No product are there which are available");
+		return page;
+	}
+    
+    
 	
 }

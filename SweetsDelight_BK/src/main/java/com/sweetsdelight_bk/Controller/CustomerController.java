@@ -27,6 +27,7 @@ import com.sweetsdelight_bk.Repository.UserRepo;
 import com.sweetsdelight_bk.Service.CartService;
 import com.sweetsdelight_bk.Service.CustomerService;
 import com.sweetsdelight_bk.Service.SweetOrderService;
+import com.sweetsdelight_bk.Utils.JwtToken;
 
 import jakarta.validation.Valid;
 
@@ -99,12 +100,17 @@ public class CustomerController {
 	}
  	
 	@GetMapping("/logini")
-	public ResponseEntity<String> logInUserHandler(Authentication auth){
+	public ResponseEntity<Customer> logInUserHandler(Authentication auth) throws CustomerException{
 		 Optional<User> opt= cRepo.findByUsername(auth.getName());
 		 if(opt.isEmpty()) throw new UserException("No user found") ;
-		 User user = opt.get();
-		 return new ResponseEntity<>(user.getUsername()+" Logged In Successfully", HttpStatus.ACCEPTED);
+		 return new ResponseEntity<>(customerService.showCustomerDetailsById(opt.get().getUserId()), HttpStatus.ACCEPTED);
 	}
-	 
+	@PostMapping("/logini")
+	public ResponseEntity<Customer> logInUserHandler(@RequestBody String token) throws CustomerException{
+		 String username = JwtToken.decodeJwt(token);
+		 Optional<User> opt= cRepo.findByUsername(username);
+		 if(opt.isEmpty()) throw new UserException("No user found") ;
+		 return new ResponseEntity<>(customerService.showCustomerDetailsById(opt.get().getUserId()), HttpStatus.ACCEPTED);
+	}
 }
 

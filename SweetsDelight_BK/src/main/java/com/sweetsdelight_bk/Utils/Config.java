@@ -41,7 +41,11 @@ public class Config {
 		}) .authorizeHttpRequests(auth -> auth.requestMatchers("/sweetDelight/customerUser/register","/sweetDelight/admin/register").permitAll()
 				.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
 				.requestMatchers("/sweetDelight/admin/logini").hasRole("ADMIN")
-				.requestMatchers("/sweetDelight/customerUser/logini").hasRole("USER")
+				.requestMatchers(HttpMethod.POST, "/sweetDelight/customerUser/logini").permitAll()
+				.requestMatchers(HttpMethod.GET, "/sweetDelight/customerUser/logini", "/sweetDelight/categories",
+						"/product/product/getallproduct", "/product/product/getallavailableproduct", 
+						"/product/product/getallavailableproduct/{category}",
+						"/sweetDelight/searchbyname").permitAll()
                 .requestMatchers(HttpMethod.GET, "/sweetDelight/admin/users", "/sweetDelight/admin/customers",
                         "/sweetDelight/admin/customers/{customerId}", "/sweetDelight/admin/products/{productId}",
                         "/sweetDelight/admin/products/{prodId}/categories/{catId}", "/sweetDelight/admin/allcarts",
@@ -50,18 +54,20 @@ public class Config {
                 .requestMatchers(HttpMethod.POST, "/sweetDelight/admin/products/{categoryId}",
                         "/sweetDelight/admin/category").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/sweetDelight/admin/product/update/{productId}",
-                        "/sweetDelight/admin/categories/update/{categoryId}").hasRole("ADMIN")
+                        "/sweetDelight/admin/categories/update/{categoryId}", 
+                        "/sweetDelight/admin/{customerId}/role/{role}",
+                        "/sweetDelight/admin/{orderId}/status/{status}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/sweetDelight/admin/products/{productId}",
                         "/sweetDelight/admin/categories/{categoryId}").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/sweetDelight/customerUser/update/{customerId}",
                         "/sweetDelight/customerUser/carts/{customerId}/add/{productId}",
-                        "/sweetDelight/customerUser/carts/{customerId}/remove/{productId}").hasRole("USER")
+                        "/sweetDelight/customerUser/carts/{customerId}/remove/{productId}").hasAnyRole("USER", "ADMIN")
                 .requestMatchers(HttpMethod.GET, "/sweetDelight/customerUser/carts/{customerId}",
                         "/sweetDelight/customerUser/price/{orderid}", "/sweetDelight/customerUser/getallorders/{customerId}",
-                        "/sweetDelight/customerUser/cart/{id}/product").hasRole("USER")
-                .requestMatchers(HttpMethod.GET, "/sweetDelight/products", "/sweetDelight/categories",
+                        "/sweetDelight/customerUser/cart/{id}/product").hasAnyRole("USER", "ADMIN")
+                .requestMatchers(HttpMethod.GET, "/sweetDelight/products",
                         "/sweetDelight/categories/{id}", "/sweetDelight/products/sorted",
-                        "/sweetDelight/category", "/sweetDelight/searchbyname",
+                        "/sweetDelight/category",
                         "/sweetDelight/product/getallproduct", "/sweetDelight/product/getallavailableproduct")
                     .hasAnyRole("ADMIN", "USER")
 				.anyRequest().authenticated())

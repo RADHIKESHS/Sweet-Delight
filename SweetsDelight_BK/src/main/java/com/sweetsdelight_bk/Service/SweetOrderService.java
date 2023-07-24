@@ -13,6 +13,7 @@ public interface SweetOrderService {
 	
 	public SweetOrder updateSweetOrder(SweetOrder order);
 	
+	public SweetOrder updateSweetOrderStatus(Integer orderId, SweetOrder.OrderStatus status) throws OrderException;
 	
 	public String cancelSweetOrder(Integer orderId) throws OrderException;
 	

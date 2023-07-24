@@ -17,4 +17,7 @@ public interface ProductRepo extends JpaRepository<Product, Integer>{
 	
 	@Query("SELECT p FROM Product p WHERE p.available = true")
 	Page<Product> showAllAvailableProduct(Pageable pageable);
+	
+	@Query("SELECT p FROM Product p WHERE p.category.name = :category")
+	Page<Product> showAllProductByCategory(String category, Pageable pageable);
 }

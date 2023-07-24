@@ -110,4 +110,13 @@ public class ProductController {
         List<Product> products = productService.showAllProductswithsort(pageNumber, pageSize, sortBy, sortDirection);
         return ResponseEntity.ok(products);
     }
+    
+    @GetMapping("/product/getallavailableproduct/{category}")
+    public ResponseEntity<Page<Product>> getAllProductsByCategory(
+    		@PathVariable String category,
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "50") int pageSize
+    ) throws ProductException {
+    	return new ResponseEntity<Page<Product>>(productService.showAllProductByCategory(category, pageNumber, pageSize), HttpStatus.OK);
+    }
 }
