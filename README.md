@@ -4,7 +4,7 @@ Description
 Frail Power 8560 is an online bakery store that allows customers to browse through various bakery products and place orders. The project is implemented using Spring Boot and provides RESTful APIs for managing products, categories, customers, carts, and orders. The application is designed to be user-friendly and secure, with different functionalities available for administrators and customers.
 
 ## Table of Contents
-- [Installation](#installation)
+- [Installation]([Frail Power 8560 GitHub Repo](https://github.com/RADHIKESHS/frail-power-8560))
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Contributors](#contributors)
@@ -82,7 +82,7 @@ Frail Power 8560 is an online bakery store that allows customers to browse throu
 Special thanks to all the contributors for their hard work and dedication in making this project a success!
 
 ## Database ER Diagram
-![ER Diagram](URL_TO_YOUR_DATABASE_ER_DIAGRAM_IMAGE)
+![ER Diagram]([URL_TO_YOUR_DATABASE_ER_DIAGRAM_IMAGE](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Sweetdelight%20database%20ER.png))
 
 ## License
 ...
