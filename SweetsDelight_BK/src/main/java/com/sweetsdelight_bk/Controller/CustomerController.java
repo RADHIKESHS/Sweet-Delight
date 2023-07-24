@@ -106,6 +106,7 @@ public class CustomerController {
 		 if(opt.isEmpty()) throw new UserException("No user found") ;
 		 return new ResponseEntity<>(customerService.showCustomerDetailsById(opt.get().getUserId()), HttpStatus.ACCEPTED);
 	}
+	
 	@PostMapping("/logini")
 	public ResponseEntity<Customer> logInUserHandler(@RequestBody String token) throws CustomerException{
 		 String username = JwtToken.decodeJwt(token);
