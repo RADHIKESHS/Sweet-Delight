@@ -56,11 +56,11 @@ public class Product {
 	private SweetOrder sweetOrder;
 	
 	 @JsonIgnore
-	  @ManyToMany(mappedBy = "products")
+	  @ManyToMany(mappedBy = "products", cascade = CascadeType.ALL)
 	  private List<Cart> carts = new ArrayList<>();
 	
     
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Category category;
 
 

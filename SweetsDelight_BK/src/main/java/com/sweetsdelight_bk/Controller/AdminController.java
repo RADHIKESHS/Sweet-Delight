@@ -205,7 +205,7 @@ public class AdminController {
  	
 	@PutMapping("/{customerId}/role/{role}")
 	public ResponseEntity<Customer> logInUserHandler(@PathVariable Integer customerId, @PathVariable String role) throws CustomerException{
-		 return new ResponseEntity<>(customerService.updateCustomerRole(customerId, role), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(customerService.updateCustomerRole(customerId, role), HttpStatus.ACCEPTED);
 	}
 	
 	@PutMapping("/{orderId}/status/{status}")
