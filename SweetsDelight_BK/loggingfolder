@@ -204,3 +204,6 @@ org.springframework.security.authentication.BadCredentialsException: Invalid Tok
 2023-07-24T10:03:12.122+05:30  INFO 3876 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
 2023-07-24T10:03:12.204+05:30  INFO 3876 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
 2023-07-24T10:03:12.225+05:30  INFO 3876 --- [restartedMain] c.s.SweetsDelightBkApplication           : Started SweetsDelightBkApplication in 11.876 seconds (process running for 13.345)
+2023-07-24T10:04:05.010+05:30  INFO 3876 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-07-24T10:04:05.012+05:30  INFO 3876 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-07-24T10:04:05.015+05:30  INFO 3876 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
