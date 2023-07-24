@@ -1,15 +1,13 @@
-# Frail Power 8560 - Online Bakery Store
+# SweetsDelight - Online Sweets & Bakery Store
 
-Description
-Frail Power 8560 is an online bakery store that allows customers to browse through various bakery products and place orders. The project is implemented using Spring Boot and provides RESTful APIs for managing products, categories, customers, carts, and orders. The application is designed to be user-friendly and secure, with different functionalities available for administrators and customers.
+### Description
+SweetDelight is an online Sweets and Bakery store that allows customers to browse through various Sweets & bakery products and place orders. The project is implemented using Spring Boot and provides RESTful APIs for managing products, categories, customers, carts, and orders. The application is designed to be user-friendly and secure, with different functionalities available for administrators and customers.
 
 ## Table of Contents
 - [Installation]([Frail Power 8560 GitHub Repo](https://github.com/RADHIKESHS/frail-power-8560))
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Contributors](#contributors)
-- [License](#license)
-- [Questions](#questions)
 
 ## Installation
 1. Clone the repository from GitHub: [Frail Power 8560 GitHub Repo](https://github.com/RADHIKESHS/frail-power-8560)
@@ -94,11 +92,5 @@ The Frail Power 8560 project uses the following technologies:
 
 Special thanks to all the contributors for their hard work and dedication in making this project a success!
 
-
-## Questions
-If you have any questions or need further assistance, please feel free to contact any of the project contributors.
-
 ## Author
-Your Name
-
-GitHub Repository: [Frail Power 8560 GitHub Repo](https://github.com/RADHIKESHS/frail-power-8560)
+SweetsDelight's Team
