@@ -37,6 +37,7 @@ import com.sweetsdelight_bk.Service.OrderBillService;
 import com.sweetsdelight_bk.Service.ProductService;
 import com.sweetsdelight_bk.Service.SweetOrderService;
 import com.sweetsdelight_bk.Service.UserService;
+import com.sweetsdelight_bk.Utils.JwtToken;
 
 import jakarta.validation.Valid;
 
@@ -212,6 +213,22 @@ public class AdminController {
 	@PutMapping("/{orderId}/status/{status}")
 	public ResponseEntity<SweetOrder> logInUserHandler(@PathVariable Integer orderId, @PathVariable SweetOrder.OrderStatus status) throws CustomerException{
 		 return new ResponseEntity<>(service.updateSweetOrderStatus(orderId, status), HttpStatus.ACCEPTED);
+	}
+	
+	@GetMapping("/logini")
+	public ResponseEntity<User> logInUserHandler(Authentication auth){
+		 Optional<User> opt= cRepo.findByUsername(auth.getName());
+		 if(opt.isEmpty()) throw new UserException("No user found") ;
+		 User user = opt.get();
+		 return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+	}
+	
+	@PostMapping("/logini")
+	public ResponseEntity<User> logInUserHandler(@RequestBody String token) throws CustomerException{
+		 String username = JwtToken.decodeJwt(token);
+		 Optional<User> opt= cRepo.findByUsername(username);
+		 if(opt.isEmpty()) throw new UserException("No user found") ;
+		 return new ResponseEntity<>(opt.get(), HttpStatus.ACCEPTED);
 	}
 
 }
