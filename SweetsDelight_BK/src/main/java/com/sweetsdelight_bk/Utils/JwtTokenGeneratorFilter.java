@@ -39,7 +39,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter {
 					.setExpiration(new Date( new Date().getTime()+1000000000))
 					.signWith(key).compact() ;
 			
-	        System.out.println("Generated JWT token: " + jwt);
+//	        System.out.println("Generated JWT token: " + jwt);
 			response.setHeader(SecurityDetails.JWT_HEADER, jwt);
 		}
 		else {

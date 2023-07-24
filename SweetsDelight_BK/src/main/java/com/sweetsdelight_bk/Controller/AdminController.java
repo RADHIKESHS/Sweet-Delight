@@ -80,6 +80,7 @@ public class AdminController {
     @PostMapping("/register")   //user
     public ResponseEntity<User> registerCustomer(@Valid @RequestBody User admin) throws CustomerException {
     	admin.setPassword(pc.encode(admin.getPassword()));
+    	admin.setRole("admin");
         return new ResponseEntity<>(userservice.saveuser(admin), HttpStatus.CREATED);
     }
     
