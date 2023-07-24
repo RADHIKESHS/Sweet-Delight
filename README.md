@@ -82,7 +82,7 @@ Frail Power 8560 is an online bakery store that allows customers to browse throu
 Special thanks to all the contributors for their hard work and dedication in making this project a success!
 
 ## Database ER Diagram
-![ER Diagram]([URL_TO_YOUR_DATABASE_ER_DIAGRAM_IMAGE](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Sweetdelight%20database%20ER.png))
+[https://github.com/RADHIKESHS/frail-power-8560/blob/main/Sweetdelight%20database%20ER.png](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Sweetdelight%20database%20ER.png)
 
 ## License
 ...
