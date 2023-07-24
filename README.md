@@ -30,6 +30,19 @@ Frail Power 8560 is an online bakery store that allows customers to browse throu
 - Place and track orders.
 - View your order history.
 
+## Technology Stack
+The Frail Power 8560 project uses the following technologies:
+
+- Java
+- Spring Boot
+- Spring Data JPA
+- MySQL (or any supported database by Spring Data JPA)
+- React (Frontend)
+- HTML, CSS, JavaScript
+
+## Database ER Diagram
+![http://url/to/img.png](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Sweetdelight%20database%20ER.png?raw=true)
+
 ## API Endpoints
 ### Admin & Customer Endpoints
 - DELETE /sweetDelight/delete/{customerid} - Delete a customer (Admin & User)
@@ -81,11 +94,6 @@ Frail Power 8560 is an online bakery store that allows customers to browse throu
 
 Special thanks to all the contributors for their hard work and dedication in making this project a success!
 
-## Database ER Diagram
-[https://github.com/RADHIKESHS/frail-power-8560/blob/main/Sweetdelight%20database%20ER.png](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Sweetdelight%20database%20ER.png)
-
-## License
-...
 
 ## Questions
 If you have any questions or need further assistance, please feel free to contact any of the project contributors.
