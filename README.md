@@ -87,7 +87,7 @@ The Frail Power 8560 project uses the following technologies:
 - Subir Adhikari: Worked on the service layer, implementing various business logic and functionalities.
 - Deepak Yadav: Contributed to the service layer, handling data processing and business operations.
 - Radhikesh Leader: Implemented JWT security for authentication and authorization in the application.
-- Rahul: Led the JPA entity mapping and database design, ensuring data persistence and integrity.
+- Rahul: Lead the JPA entity mapping and database design, ensuring data persistence and integrity.
 - Vivek Sharma: Worked on the frontend development, designing and implementing the user interface.
 
 Special thanks to all the contributors for their hard work and dedication in making this project a success!
