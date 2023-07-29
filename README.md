@@ -3,6 +3,15 @@
 ### Description
 SweetDelight is an online Sweets and Bakery store that allows customers to browse through various Sweets & bakery products and place orders. The project is implemented using Spring Boot and provides RESTful APIs for managing products, categories, customers, carts, and orders. The application is designed to be user-friendly and secure, with different functionalities available for administrators and customers.
 
+## HomePage
+![http://url/to/img.png](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Home%20page.jpg)
+
+## ProductPage
+![http://url/to/img.png](https://github.com/RADHIKESHS/frail-power-8560/blob/main/productpage.jpg)
+
+## AdminPage
+![http://url/to/img.png](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Adminpanel.jpg)
+
 ## Table of Contents
 - [Installation]([Frail Power 8560 GitHub Repo](https://github.com/RADHIKESHS/frail-power-8560))
 - [Usage](#usage)
