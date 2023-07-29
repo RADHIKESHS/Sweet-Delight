@@ -9,7 +9,7 @@ export default function Order() {
   const [orders, setOrders] = useState(null);
 
   useLayoutEffect(() => {
-    getOrders(state[KEYS.USER].userId)
+    getOrders()
     .then(setOrders)
     .catch(e => setOrders([]))
   }, [])

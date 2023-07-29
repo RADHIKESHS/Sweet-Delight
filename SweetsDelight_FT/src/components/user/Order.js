@@ -1,5 +1,5 @@
 import React, { useContext, useLayoutEffect, useState } from 'react'
-import {getOrders} from '../request/fetch'
+import {getOrder} from '../request/fetch'
 import Store from '../store/storeContext'
 import {KEYS} from '../store/reducer'
 
@@ -8,7 +8,7 @@ export default function Order() {
     const [orders, setOrders] = useState([])
 
     useLayoutEffect(() => {
-        getOrders(state[KEYS.USER].userId)
+        getOrder(state[KEYS.USER].userId)
         .then(setOrders)
         .catch(e => console.error(e))
     }, [])

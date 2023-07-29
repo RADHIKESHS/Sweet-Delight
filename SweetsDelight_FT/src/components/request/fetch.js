@@ -32,7 +32,6 @@ export default function makeRequest(endpoint, method, body, responseType = 'json
             return this
         }
     }
-    return 
 }
 
 // login 
@@ -98,7 +97,10 @@ export const placeOrder = async (customerId) => {
     return await makeRequest(`/sweetorder/add/${customerId}`, "POST", null, 'text').auth().execute()
 }
 
-export const getOrders = async (customerId) => {
+export const getOrders = async () => {
+    return await makeRequest(`/sweetorder/orders/allorders`).auth().execute()
+}
+export const getOrder = async (customerId) => {
     return await makeRequest(`/sweetorder/getallorders/${customerId}`).auth().execute()
 }
 // customer
