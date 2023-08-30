@@ -3,6 +3,8 @@
 ### Description
 SweetDelight is an online Sweets and Bakery store that allows customers to browse through various Sweets & bakery products and place orders. The project is implemented using Spring Boot and provides RESTful APIs for managing products, categories, customers, carts, and orders. The application is designed to be user-friendly and secure, with different functionalities available for administrators and customers.
 
+Deployed Netlify link:   https://enchanting-cupcake-7ed0a8.netlify.app/ <br>
+
 ## HomePage
 ![http://url/to/img.png](https://github.com/RADHIKESHS/frail-power-8560/blob/main/Home%20page.jpg)
 
