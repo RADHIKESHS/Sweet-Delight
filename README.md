@@ -21,7 +21,7 @@ Deployed Netlify link:   https://enchanting-cupcake-7ed0a8.netlify.app/ <br>
 - [Contributors](#contributors)
 
 ## Installation
-1. Clone the repository from GitHub: [Frail Power 8560 GitHub Repo](https://github.com/RADHIKESHS/frail-power-8560)
+1. Clone the repository from GitHub: [Sweet-Delight](https://github.com/RADHIKESHS/frail-power-8560)
 2. Install Java JDK and Spring Boot.
 3. Setup the database (MySQL, PostgreSQL, or any supported by Spring Data JPA).
 4. Configure the application properties file with database credentials.
